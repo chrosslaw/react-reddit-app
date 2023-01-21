@@ -1,0 +1,15 @@
+header {
+  height: 200px;
+  background-color: black;
+}
+p {
+  color: white;
+  font-weight: bold;
+}
+header .div {
+  display: flex;
+  justify-content: center;
+}
+.logo {
+  padding-top: 10px;
+}
