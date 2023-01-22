@@ -1,9 +1,10 @@
 import React from "react";
-import "./Header.css";
-// import { SearchBar } from "../searchbar/SearchBar";
+
+import { SearchBar } from "../searchbar/SearchBar";
 import Logo from "../../images/logo.png";
 import bolt from "../../images/bolt.png";
 import boltRight from "../../images/bolt-right.png";
+import "./Header.css";
 
 export const Header = () => {
   return (
@@ -18,10 +19,9 @@ export const Header = () => {
 
           <img src={boltRight} alt="rightBolt" height={50} width={50} />
         </span>
-
-        {/* <div>
-        <SearchBar />
-      </div> */}
+        <span>
+          <SearchBar />
+        </span>
       </div>
     </header>
   );
