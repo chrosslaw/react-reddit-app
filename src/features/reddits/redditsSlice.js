@@ -7,3 +7,5 @@ export const redditsSlice = createSlice({
   },
   reducers: {},
 });
+
+export default redditsSlice.reducer;
