@@ -5,11 +5,11 @@ export const loadSubs = createAsyncThunk(
   async () => {
     const data = await fetch(`https://www.reddit.com/subreddits.json`);
     const json = await data.json();
-    return json;
+    return json.data.children.map((subreddit) => subreddit.data);
   }
 );
 
-export const subredditsSlice = createSlice({
+const sliceOptions = {
   name: "subreddits",
   initialState: {
     subList: [],
@@ -32,8 +32,8 @@ export const subredditsSlice = createSlice({
       state.hasError = true;
     },
   },
-});
+};
 
 export const selectAllSubreddits = (state) => state.subreddits.subList;
-
+export const subredditsSlice = createSlice(sliceOptions);
 export default subredditsSlice.reducer;
