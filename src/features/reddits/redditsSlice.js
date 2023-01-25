@@ -26,14 +26,33 @@ const sliceOptions = {
     searchTerm: "",
     subreddits: "r/pics/",
   },
-  reducers: {},
+  reducers: {
+    setSearchTerm(state, action) {
+      state.searchTerm = action.payload;
+    },
+    setPosts(state, action) {
+      state.posts = action.payload;
+    },
+    setSubreddit(state, action) {
+      state.subreddits = action.payload;
+      state.searchTerm = "";
+    },
+    toggleCommentsSwitch(state, action) {
+      state.posts[action.payload].showingComments =
+        !state.posts[action.payload].showingComments;
+    },
+  },
   extraReducers: {
-    [loadComments.pending]: (state) => {
+    [loadComments.pending]: (state, action) => {
+      state.reducers.toggleCommentsSwitch(state, action);
+      if (!state.posts[action.payload].showingComments) {
+        return;
+      }
       state.isLoading = true;
       state.hasError = false;
     },
     [loadComments.fulfilled]: (state, action) => {
-      state.recipes = action.payload;
+      state.recipes = action.payload.comments;
       state.isLoading = false;
       state.hasError = false;
     },
@@ -57,5 +76,16 @@ const sliceOptions = {
   },
 };
 
+const selectAllPosts = (state) => state.reddits.posts;
+export const selectSearchTerm = (state) => state.reddits.searchTerm;
+
+export const selectFilteredPosts = (state) => {
+  const reddits = selectAllPosts(state);
+  const searchTerm = selectSearchTerm(state);
+
+  return reddits.filter((post) =>
+    post.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+};
 export const redditsSlice = createSlice(sliceOptions);
 export default redditsSlice.reducer;
