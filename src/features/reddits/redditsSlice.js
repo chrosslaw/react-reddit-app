@@ -48,17 +48,17 @@ const sliceOptions = {
       if (!state.posts[action.payload].showingComments) {
         return;
       }
-      state.isLoading = true;
-      state.hasError = false;
+      state.reddits[action.payload].isLoading = true;
+      state.reddits[action.payload].hasError = false;
     },
     [loadComments.fulfilled]: (state, action) => {
-      state.recipes = action.payload.comments;
-      state.isLoading = false;
-      state.hasError = false;
+      state.reddits[action.payload.index].comments = action.payload.comments;
+      state.reddits[action.payload.index].isLoading = false;
+      state.reddits[action.payload.index].hasError = false;
     },
-    [loadComments.rejected]: (state) => {
-      state.isLoading = false;
-      state.hasError = true;
+    [loadComments.rejected]: (state, action) => {
+      state.reddits[action.payload].isLoading = false;
+      state.reddits[action.payload].hasError = true;
     },
     [loadPosts.pending]: (state) => {
       state.isLoading = true;
@@ -78,6 +78,7 @@ const sliceOptions = {
 
 const selectAllPosts = (state) => state.reddits.posts;
 export const selectSearchTerm = (state) => state.reddits.searchTerm;
+export const selectSubreddit = (state) => state.reddit.subreddits;
 
 export const selectFilteredPosts = (state) => {
   const reddits = selectAllPosts(state);
