@@ -88,4 +88,6 @@ export const selectFilteredPosts = (state) => {
   );
 };
 export const redditsSlice = createSlice(sliceOptions);
+export const { setSearchTerm, setPosts, setSubreddit, toggleCommentsSwitch } =
+  redditsSlice.actions;
 export default redditsSlice.reducer;

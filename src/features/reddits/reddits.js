@@ -6,10 +6,11 @@ import {
   selectFilteredPosts,
   setSearchTerm,
 } from "./redditsSlice";
+import Reddit from "./Reddit";
 
-const Reddits = () => {
+export const Reddits = () => {
   const reddits = useSelector((state) => state.reddits);
-  const { isLoading, hasError, searchTerm, selectedSubreddit } = reddits;
+  const { hasError, searchTerm, selectedSubreddit } = reddits;
   const posts = useSelector(selectFilteredPosts);
   const dispatch = useDispatch();
 
@@ -17,7 +18,7 @@ const Reddits = () => {
     dispatch(loadPosts(selectedSubreddit));
   }, [selectedSubreddit, dispatch]);
 
-  const toggleCommentsSwitch = (index) => {
+  const toggleComments = (index) => {
     const getComments = (permalink) => {
       dispatch(loadComments(index, permalink));
     };
@@ -47,5 +48,16 @@ const Reddits = () => {
       </div>
     );
   }
-  return <div></div>;
+
+  return (
+    <>
+      {posts.map((post, index) => (
+        <Reddit
+          key={post.id}
+          post={post}
+          toggleComments={toggleComments(index)}
+        />
+      ))}
+    </>
+  );
 };
