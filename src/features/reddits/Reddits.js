@@ -1,12 +1,9 @@
-import { React, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  loadComments,
-  loadPosts,
-  selectFilteredPosts,
-  setSearchTerm,
-} from "./redditsSlice";
-import Reddit from "./Reddit";
+
+import { loadComments, loadPosts, selectFilteredPosts } from "./redditsSlice";
+import Post from "../../components/Post/Post";
+import { setSearchTerm } from "../header/headerSlice";
 
 export const Reddits = () => {
   const reddits = useSelector((state) => state.reddits);
@@ -52,7 +49,7 @@ export const Reddits = () => {
   return (
     <>
       {posts.map((post, index) => (
-        <Reddit
+        <Post
           key={post.id}
           post={post}
           toggleComments={toggleComments(index)}

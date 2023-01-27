@@ -1,8 +1,8 @@
 import React from "react";
-import Tile from "../../components/tile/Tile";
-import { Comment } from "../../components/comment/Comment";
+import Tile from "../tile/Tile";
+import { Comment } from "../comment/Comment";
 
-const Reddit = ({ post, toggleComments }) => {
+const Post = ({ post, toggleComments }) => {
   const renderComments = () => {
     if (post.hasError) {
       return (
@@ -53,4 +53,4 @@ const Reddit = ({ post, toggleComments }) => {
   );
 };
 
-export default Reddit;
+export default Post;

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Tile from "../../components/tile/Tile";
 import { loadSubs, selectAllSubreddits } from "./subredditsSlice";
+import "./Subreddits.css";
 
 export const Subreddits = () => {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ export const Subreddits = () => {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className="subreddits">
       <Tile>
         <ul>
           {allSubreddits.map((subs) => (

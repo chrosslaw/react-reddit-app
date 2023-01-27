@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { selectSearchTerm } from "../header/headerSlice";
 
 export const loadPosts = createAsyncThunk(
   "reddits/getAllSubredditsPosts",
@@ -23,13 +24,9 @@ const sliceOptions = {
     posts: [],
     hasError: false,
     isLoading: false,
-    searchTerm: "",
     subreddits: "r/pics/",
   },
   reducers: {
-    setSearchTerm(state, action) {
-      state.searchTerm = action.payload;
-    },
     setPosts(state, action) {
       state.posts = action.payload;
     },
@@ -60,35 +57,33 @@ const sliceOptions = {
       state.reddits[action.payload].isLoading = false;
       state.reddits[action.payload].hasError = true;
     },
-    [loadPosts.pending]: (state) => {
-      state.isLoading = true;
-      state.hasError = false;
+    [loadPosts.pending]: (state, action) => {
+      state.reddits[action.payload].isLoading = true;
+      state.reddits[action.payload].hasError = false;
     },
     [loadPosts.fulfilled]: (state, action) => {
-      state.recipes = action.payload;
-      state.isLoading = false;
-      state.hasError = false;
+      state.reddits[action.payload.index].reddits = action.payload;
+      state.reddits[action.payload.index].isLoading = false;
+      state.reddits[action.payload.index].hasError = false;
     },
-    [loadPosts.rejected]: (state) => {
-      state.isLoading = false;
-      state.hasError = true;
+    [loadPosts.rejected]: (state, action) => {
+      state.reddits[action.payload].isLoading = false;
+      state.reddits[action.payload].hasError = true;
     },
   },
 };
 
 const selectAllPosts = (state) => state.reddits.posts;
-export const selectSearchTerm = (state) => state.reddits.searchTerm;
 export const selectSubreddit = (state) => state.reddit.subreddits;
 
 export const selectFilteredPosts = (state) => {
   const reddits = selectAllPosts(state);
-  const searchTerm = selectSearchTerm(state);
-
+  const searchTerm = selectSearchTerm;
   return reddits.filter((post) =>
     post.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 };
 export const redditsSlice = createSlice(sliceOptions);
-export const { setSearchTerm, setPosts, setSubreddit, toggleCommentsSwitch } =
+export const { setPosts, setSubreddit, toggleCommentsSwitch } =
   redditsSlice.actions;
 export default redditsSlice.reducer;
