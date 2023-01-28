@@ -7,9 +7,8 @@ import { Reddits } from "../features/reddits/Reddits";
 function App() {
   return (
     <div className="App">
-      <div>
-        <Header />
-      </div>
+      <Header />
+
       <main>
         <Reddits />
         <Subreddits />

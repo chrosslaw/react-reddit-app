@@ -1,6 +1,6 @@
 import React from "react";
 import Tile from "../tile/Tile";
-import { Comment } from "../comment/Comment";
+import Comment from "../comment/Comment";
 
 const Post = ({ post, toggleComments }) => {
   const renderComments = () => {

@@ -23,7 +23,7 @@ const sliceOptions = {
       state.hasError = false;
     },
     [loadSubs.fulfilled]: (state, action) => {
-      state.recipes = action.payload;
+      state.subList = action.payload;
       state.isLoading = false;
       state.hasError = false;
     },

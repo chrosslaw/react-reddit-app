@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Comment = ({ comment }) => {
+const Comment = ({ comment }) => {
   return (
     <div>
       <p>{comment.author}</p>
@@ -9,3 +9,5 @@ export const Comment = ({ comment }) => {
     </div>
   );
 };
+
+export default Comment;

@@ -1,19 +1,18 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import { loadComments, loadPosts, selectFilteredPosts } from "./redditsSlice";
 import Post from "../../components/Post/Post";
 import { setSearchTerm } from "../header/headerSlice";
 
 export const Reddits = () => {
   const reddits = useSelector((state) => state.reddits);
-  const { hasError, searchTerm, selectedSubreddit } = reddits;
+  const { hasError, searchTerm, subreddits } = reddits;
   const posts = useSelector(selectFilteredPosts);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadPosts(selectedSubreddit));
-  }, [selectedSubreddit, dispatch]);
+    dispatch(loadPosts(subreddits));
+  }, [subreddits, dispatch]);
 
   const toggleComments = (index) => {
     const getComments = (permalink) => {
@@ -26,10 +25,7 @@ export const Reddits = () => {
     return (
       <div>
         <h2>Failed to load posts.</h2>
-        <button
-          type="button"
-          onClick={() => dispatch(loadPosts(selectedSubreddit))}
-        >
+        <button type="button" onClick={() => dispatch(loadPosts(subreddits))}>
           Load Posts
         </button>
       </div>

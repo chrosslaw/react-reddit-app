@@ -1,4 +1,8 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  createAsyncThunk,
+  createSelector,
+} from "@reduxjs/toolkit";
 import { selectSearchTerm } from "../header/headerSlice";
 
 export const loadPosts = createAsyncThunk(
@@ -30,7 +34,7 @@ const sliceOptions = {
     setPosts(state, action) {
       state.posts = action.payload;
     },
-    setSubreddit(state, action) {
+    setSubreddits(state, action) {
       state.subreddits = action.payload;
       state.searchTerm = "";
     },
@@ -45,45 +49,57 @@ const sliceOptions = {
       if (!state.posts[action.payload].showingComments) {
         return;
       }
-      state.reddits[action.payload].isLoading = true;
-      state.reddits[action.payload].hasError = false;
+      state.posts[action.payload].isLoading = true;
+      state.posts[action.payload].hasError = false;
     },
     [loadComments.fulfilled]: (state, action) => {
-      state.reddits[action.payload.index].comments = action.payload.comments;
-      state.reddits[action.payload.index].isLoading = false;
-      state.reddits[action.payload.index].hasError = false;
+      state.posts[action.payload.index].comments = action.payload.comments;
+      state.posts[action.payload.index].isLoading = false;
+      state.posts[action.payload.index].hasError = false;
     },
     [loadComments.rejected]: (state, action) => {
-      state.reddits[action.payload].isLoading = false;
-      state.reddits[action.payload].hasError = true;
+      state.posts[action.payload].isLoading = false;
+      state.posts[action.payload].hasError = true;
     },
     [loadPosts.pending]: (state, action) => {
-      state.reddits[action.payload].isLoading = true;
-      state.reddits[action.payload].hasError = false;
+      state.posts[action.payload].isLoading = true;
+      state.posts[action.payload].hasError = false;
     },
     [loadPosts.fulfilled]: (state, action) => {
-      state.reddits[action.payload.index].reddits = action.payload;
-      state.reddits[action.payload.index].isLoading = false;
-      state.reddits[action.payload.index].hasError = false;
+      state.posts[action.payload.index].posts = action.payload;
+      state.posts[action.payload.index].isLoading = false;
+      state.posts[action.payload.index].hasError = false;
     },
     [loadPosts.rejected]: (state, action) => {
-      state.reddits[action.payload].isLoading = false;
-      state.reddits[action.payload].hasError = true;
+      state.posts[action.payload].isLoading = false;
+      state.posts[action.payload].hasError = true;
     },
   },
 };
 
 const selectAllPosts = (state) => state.reddits.posts;
-export const selectSubreddit = (state) => state.reddit.subreddits;
+export const selectSubreddits = (state) => state.reddits.subreddits;
 
-export const selectFilteredPosts = (state) => {
-  const reddits = selectAllPosts(state);
-  const searchTerm = selectSearchTerm;
-  return reddits.filter((post) =>
-    post.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-};
+// export const selectFilteredPosts = (state) => {
+//   const posts = selectAllPosts(state);
+//   const searchTerm = selectSearchTerm;
+//   return posts.filter((post) =>
+//     post.title.toLowerCase().includes(searchTerm.toLowerCase())
+//   );
+// };
+
+export const selectFilteredPosts = createSelector(
+  [selectAllPosts, selectSearchTerm],
+  (posts, searchTerm) => {
+    if (searchTerm !== "") {
+      return posts.filter((post) =>
+        post.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+    return posts;
+  }
+);
 export const redditsSlice = createSlice(sliceOptions);
-export const { setPosts, setSubreddit, toggleCommentsSwitch } =
+export const { setPosts, setSubreddits, toggleCommentsSwitch } =
   redditsSlice.actions;
 export default redditsSlice.reducer;
