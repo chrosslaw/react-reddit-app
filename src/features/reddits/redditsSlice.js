@@ -76,7 +76,7 @@ const sliceOptions = {
     },
   },
 };
-
+export const redditsSlice = createSlice(sliceOptions);
 const selectAllPosts = (state) => state.reddits.posts;
 export const selectSubreddits = (state) => state.reddits.subreddits;
 
@@ -99,7 +99,7 @@ export const selectFilteredPosts = createSelector(
     return posts;
   }
 );
-export const redditsSlice = createSlice(sliceOptions);
+
 export const { setPosts, setSubreddits, toggleCommentsSwitch } =
   redditsSlice.actions;
 export default redditsSlice.reducer;
