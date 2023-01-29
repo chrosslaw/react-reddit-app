@@ -19,27 +19,20 @@ export const Subreddits = () => {
     <div className="subreddits">
       <Tile>
         <h1>Subreddits</h1>
-        <ul>
-          {allSubreddits.map((subreddit) => (
-            <li
-              key={subreddit.id}
-              className={`${
-                selectedSubreddits === subreddit.url && `selected-subreddit`
-              }`}
+        {allSubreddits.map((subreddit) => (
+          <a key={subreddit.id} href={subreddit.url}>
+            <button
+              type="button"
+              onClick={() => dispatch(setSubreddits(subreddit.url))}
             >
-              <button
-                type="button"
-                onClick={() => dispatch(setSubreddits(subreddit.url))}
-              >
-                <img
-                  src={subreddit.icon_img || subreddit.display_name}
-                  alt={`${subreddit.display_name}`}
-                />
-                {subreddit.display_name}
-              </button>
-            </li>
-          ))}
-        </ul>
+              <img
+                src={subreddit.icon_img || subreddit.display_name}
+                alt={`${subreddit.display_name}`}
+              />
+              {subreddit.display_name}
+            </button>
+          </a>
+        ))}
       </Tile>
     </div>
   );
