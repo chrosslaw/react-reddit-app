@@ -6,7 +6,7 @@ const spinnerIconUrl =
 export default function Spinner() {
   return (
     <div>
-      <img src={spinnerIconUrl} alt="Recipes are loading" className="spinner" />
+      <img src={spinnerIconUrl} alt="Post's loading" className="spinner" />
     </div>
   );
 }

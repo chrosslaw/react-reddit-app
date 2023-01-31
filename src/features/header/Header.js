@@ -1,10 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  clearSearchTerm,
-  selectSearchTerm,
-  setSearchTerm,
-} from "./headerSlice";
+import { selectSearchTerm, setSearchTerm } from "./headerSlice";
 import "./Header.css";
 import Logo from "../../images/logo.png";
 import bolt from "../../images/bolt.png";
@@ -20,41 +16,39 @@ export const Header = () => {
   };
 
   const onSearchTermClearHandler = () => {
-    dispatch(clearSearchTerm());
+    dispatch(setSearchTerm(""));
   };
 
   return (
     <header>
-      <div id="heading-container">
-        <img src={Logo} alt="logo" />
+      <img src={Logo} alt="logo" />
 
-        <span class="heading">
-          <img src={bolt} alt="bolt" height={50} width={50} />
+      <span className="heading">
+        <img src={bolt} alt="bolt" height={50} width={50} />
 
-          <p>RedditCharged</p>
+        <h1>RedditCharged</h1>
 
-          <img src={boltRight} alt="rightBolt" height={50} width={50} />
-        </span>
+        <img src={boltRight} alt="rightBolt" height={50} width={50} />
+      </span>
 
-        <div className="search-form">
-          <input
-            id="search"
-            type="text"
-            value={searchTerm}
-            onChange={onSearchChangeHandler}
-            placeholder="Search"
-            className="search"
-          />
+      <div className="search-form">
+        <input
+          id="search"
+          type="text"
+          value={searchTerm}
+          onChange={onSearchChangeHandler}
+          placeholder="Search"
+          className="search"
+        />
 
-          <button
-            onClick={onSearchTermClearHandler}
-            type="button"
-            id="search-clear-button"
-            className="search-button"
-          >
-            🔎
-          </button>
-        </div>
+        <button
+          onClick={onSearchTermClearHandler}
+          type="button"
+          id="search-clear-button"
+          className="search-button"
+        >
+          🔎
+        </button>
       </div>
     </header>
   );

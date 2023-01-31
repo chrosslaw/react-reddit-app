@@ -1,13 +1,24 @@
 button {
-  width: 50px;
+  width: min-content;
   height: auto;
-  display: inline-block;
+  display: flex;
   text-align: center;
-  text-decoration: none;
-  margin: 1px;
+  align-items: center;
 }
 
-img {
-  width: 30px;
+.subs img {
+  width: 20px;
   padding: 5px;
+}
+div.subreddits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 5px;
+  justify-content: center;
+}
+div.subreddits a {
+  color: white;
+  text-align: center;
+  text-decoration: none;
 }

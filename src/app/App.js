@@ -8,10 +8,9 @@ function App() {
   return (
     <div className="App">
       <Header />
-
+      <Subreddits />
       <main>
         <Reddits />
-        <Subreddits />
       </main>
     </div>
   );

@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadComments, loadPosts, selectFilteredPosts } from "./redditsSlice";
 import Post from "../../components/Post/Post";
 import { setSearchTerm } from "../header/headerSlice";
+import Spinner from "../../components/spinner/Spinner";
 
 export const Reddits = () => {
   const reddits = useSelector((state) => state.reddits);
-  const { hasError, searchTerm, subreddits } = reddits;
+  const { searchTerm, subreddits, hasError, isLoading } = reddits;
   const posts = useSelector(selectFilteredPosts);
   const dispatch = useDispatch();
 
@@ -20,7 +21,9 @@ export const Reddits = () => {
     };
     return getComments;
   };
-
+  if (isLoading) {
+    return <div>{Array(20).fill(<Spinner />)}</div>;
+  }
   if (hasError) {
     return (
       <div>
@@ -31,6 +34,7 @@ export const Reddits = () => {
       </div>
     );
   }
+
   if (posts.length === 0) {
     return (
       <div>
@@ -43,7 +47,7 @@ export const Reddits = () => {
   }
 
   return (
-    <>
+    <div className="reddits">
       {posts.map((post, index) => (
         <Post
           key={post.id}
@@ -51,6 +55,8 @@ export const Reddits = () => {
           toggleComments={toggleComments(index)}
         />
       ))}
-    </>
+    </div>
   );
 };
+
+export default Reddits;

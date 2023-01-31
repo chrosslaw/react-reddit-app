@@ -1,15 +1,18 @@
 import React from "react";
-import Tile from "../tile/Tile";
 import Comment from "../comment/Comment";
+import Spinner from "../spinner/Spinner";
 
 const Post = ({ post, toggleComments }) => {
   const renderComments = () => {
     if (post.hasError) {
       return (
         <div>
-          <h5>An error has occured</h5>
+          <h5>Oops, there has been an error.</h5>
         </div>
       );
+    }
+    if (post.loading) {
+      <Spinner />;
     }
     if (post.showComments) {
       return (
@@ -24,31 +27,29 @@ const Post = ({ post, toggleComments }) => {
   };
   return (
     <article key={post.id}>
-      <Tile>
+      <div>
         <div>
-          <div>
-            <h3>post.title</h3>
+          <h3>post.title</h3>
 
-            <img src={post.url} alt="post" />
-          </div>
-          <div>
-            <span>
-              <h5>{post.author}</h5>
-            </span>
-            <span className="post-comments-container">
-              <button
-                type="button"
-                className={post.showComment}
-                onClick={() => toggleComments(post.permalink)}
-                aria-label="Show comments"
-              ></button>
-
-              {post.num_comments}
-            </span>
-          </div>
-          {renderComments()}
+          <img src={post.url} alt="post" />
         </div>
-      </Tile>
+        <div>
+          <span>
+            <h5>{post.author}</h5>
+          </span>
+          <span className="post-comments-container">
+            <button
+              type="button"
+              className={post.showComment}
+              onClick={() => toggleComments(post.permalink)}
+              aria-label="Show comments"
+            ></button>
+
+            {post.num_comments}
+          </span>
+        </div>
+        {renderComments()}
+      </div>
     </article>
   );
 };

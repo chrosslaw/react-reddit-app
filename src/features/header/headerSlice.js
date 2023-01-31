@@ -2,15 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const headerSlice = createSlice({
   name: "search",
-  initialState: "",
+  initialState: {},
   reducers: {
     setSearchTerm: (state, action) => (state = action.payload),
-    clearSearchTerm: (state) => (state = ""),
   },
 });
 
-export const { setSearchTerm, clearSearchTerm } = headerSlice.actions;
+export const { setSearchTerm } = headerSlice.actions;
 
-export const selectSearchTerm = (state) => state.search;
+export const selectSearchTerm = (state) => state.searchTerm;
 
 export default headerSlice.reducer;
