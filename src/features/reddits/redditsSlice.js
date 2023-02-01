@@ -1,24 +1,21 @@
 import {
   createSlice,
   createAsyncThunk,
-  // createSelector,
+  createSelector,
 } from "@reduxjs/toolkit";
-import { selectSearchTerm } from "../header/headerSlice";
+import { getSubredditPosts, getPostComments } from "../../api/redditAPI";
 
-export const loadPosts = createAsyncThunk(
-  "reddits/getAllSubredditsPosts",
-  async (subreddit) => {
-    const data = await fetch(`https://www.reddit.com/${subreddit}.json`);
-    const json = await data.json();
-    return json.data.children.map((post) => post.data);
-  }
-);
+export const loadPosts = createAsyncThunk("reddits/loadPosts", async () => {
+  const data = await fetch(getSubredditPosts);
+  const json = await data.json();
+  return json;
+});
 export const loadComments = createAsyncThunk(
-  "reddits/getAllComments",
-  async (permalink) => {
-    const data = await fetch(`https://www.reddit.com/${permalink}.json`);
+  "reddits/loadComments",
+  async () => {
+    const data = await fetch(getPostComments);
     const json = await data.json();
-    return json.data.children.map((subreddit) => subreddit.data);
+    return json;
   }
 );
 
@@ -32,7 +29,9 @@ const sliceOptions = {
     subreddits: "r/pics/",
   },
   reducers: {
-    setSearchTerm: (state, action) => (state = action.payload),
+    setSearchTerm(state, action) {
+      state.searchTerm = action.payload;
+    },
     setPosts(state, action) {
       state.posts = action.payload;
     },
@@ -81,32 +80,33 @@ const sliceOptions = {
 };
 
 export const redditsSlice = createSlice(sliceOptions);
-export const { setPosts, setSubreddits, toggleCommentsSwitch } =
+export const { setPosts, setSubreddits, toggleCommentsSwitch, setSearchTerm } =
   redditsSlice.actions;
 const selectAllPosts = (state) => state.reddits.posts;
 export const selectSubreddits = (state) => state.reddits.subreddits;
+export const selectSearchTerm = (state) => state.reddits.searchTerm;
 
-export const selectFilteredPosts = (state) => {
-  const posts = selectAllPosts(state);
-  const searchTerm = selectSearchTerm;
-  if (searchTerm !== "") {
-    posts.filter((post) =>
-      post.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  }
-  return posts;
-};
-
-// export const selectFilteredPosts = createSelector(
-//   [selectAllPosts, selectSearchTerm],
-//   (posts, searchTerm) => {
-//     if (searchTerm !== "") {
-//       return posts.filter((post) =>
-//         post.title.toLowerCase().includes(searchTerm.toLowerCase())
-//       );
-//     }
-//     return posts;
+// export const selectFilteredPosts = (state) => {
+//   const posts = selectAllPosts(state);
+//   const searchTerm = selectSearchTerm;
+//   if (searchTerm !== "") {
+//     posts.filter((post) =>
+//       post.title.toLowerCase().includes(searchTerm.toLowerCase())
+//     );
 //   }
-// );
+//   return posts;
+// };
+
+export const selectFilteredPosts = createSelector(
+  [selectAllPosts, selectSearchTerm],
+  (posts, searchTerm) => {
+    if (searchTerm !== "") {
+      return posts.filter((post) =>
+        post.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+    return posts;
+  }
+);
 
 export default redditsSlice.reducer;

@@ -3,14 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { loadSubs, selectAllSubreddits } from "./subredditsSlice";
 import "./Subreddits.css";
-import { setSubreddits } from "../reddits/redditsSlice";
+import { setSubreddits, selectSubreddits } from "../reddits/redditsSlice";
 import bolt from "../../images/bolt.png";
 
 export const Subreddits = () => {
   const dispatch = useDispatch();
-  const allSubreddits = useSelector(selectAllSubreddits);
-  // const selectedSubreddits = useSelector(selectSubreddits);
-  //   const { isLoading } = useSelector((state) => state.allSubreddits);
+  const subreddits = useSelector(selectAllSubreddits);
+  const selectedSubreddits = useSelector(selectSubreddits);
 
   useEffect(() => {
     dispatch(loadSubs());
@@ -20,8 +19,12 @@ export const Subreddits = () => {
     <div>
       <h1 className="subs">Subreddits</h1>
       <div className="subreddits">
-        {allSubreddits.map((subreddit) => (
-          <a key={subreddit.id} href={subreddit.url} className="subs">
+        {subreddits.map((subreddit) => (
+          <a
+            key={subreddit.id}
+            href={subreddit.url}
+            className={`subs ${selectedSubreddits === subreddit.url}`}
+          >
             <button
               type="button"
               onClick={() => dispatch(setSubreddits(subreddit.url))}

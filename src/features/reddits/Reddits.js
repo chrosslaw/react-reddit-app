@@ -1,8 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadComments, loadPosts, selectFilteredPosts } from "./redditsSlice";
+import {
+  setSearchTerm,
+  loadComments,
+  loadPosts,
+  selectFilteredPosts,
+} from "./redditsSlice";
 import Post from "../../components/Post/Post";
-import { setSearchTerm } from "../header/headerSlice";
+
 import Spinner from "../../components/spinner/Spinner";
 
 export const Reddits = () => {
