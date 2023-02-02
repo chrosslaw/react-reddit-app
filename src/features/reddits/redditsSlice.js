@@ -1,18 +1,28 @@
 import {
   createSlice,
   createAsyncThunk,
-  createSelector,
+  // createSelector,
 } from "@reduxjs/toolkit";
 import { getSubredditPosts, getPostComments } from "../../api/redditAPI";
 
-export const loadPosts = createAsyncThunk("reddits/loadPosts", async () => {
-  const data = await fetch(getSubredditPosts);
-  const json = await data.json();
-  return json;
-});
+export const loadPosts = createAsyncThunk(
+  "reddits/loadPosts",
+  async (dispatch) => {
+    const data = await getSubredditPosts(selectAllPosts);
+    const posts = data.map((post) => ({
+      ...post,
+      showingComments: false,
+      comments: [],
+      loadingComments: false,
+      errorComments: false,
+    }));
+    dispatch(loadPosts.fulfilled(posts));
+  }
+);
+
 export const loadComments = createAsyncThunk(
   "reddits/loadComments",
-  async () => {
+  async (permalink) => {
     const data = await fetch(getPostComments);
     const json = await data.json();
     return json;
@@ -64,11 +74,11 @@ const sliceOptions = {
       state.posts[action.payload].hasError = true;
     },
     [loadPosts.pending]: (state, action) => {
-      state.posts[action.payload].isLoading = true;
-      state.posts[action.payload].hasError = false;
+      state.posts.isLoading = true;
+      state.posts.hasError = false;
     },
     [loadPosts.fulfilled]: (state, action) => {
-      state.posts = action.payload;
+      state.posts.push(action.payload);
       state.posts.isLoading = false;
       state.posts.hasError = false;
     },
@@ -86,27 +96,27 @@ const selectAllPosts = (state) => state.reddits.posts;
 export const selectSubreddits = (state) => state.reddits.subreddits;
 export const selectSearchTerm = (state) => state.reddits.searchTerm;
 
-// export const selectFilteredPosts = (state) => {
-//   const posts = selectAllPosts(state);
-//   const searchTerm = selectSearchTerm;
-//   if (searchTerm !== "") {
-//     posts.filter((post) =>
-//       post.title.toLowerCase().includes(searchTerm.toLowerCase())
-//     );
-//   }
-//   return posts;
-// };
-
-export const selectFilteredPosts = createSelector(
-  [selectAllPosts, selectSearchTerm],
-  (posts, searchTerm) => {
-    if (searchTerm !== "") {
-      return posts.filter((post) =>
-        post.title.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    }
-    return posts;
+export const selectFilteredPosts = (state) => {
+  const posts = selectAllPosts(state);
+  const searchTerm = selectSearchTerm(state);
+  if (searchTerm !== "") {
+    return posts.filter((post) =>
+      post.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
   }
-);
+  return posts;
+};
+
+// export const selectFilteredPosts = createSelector(
+//   [selectAllPosts, selectSearchTerm],
+//   (posts, searchTerm) => {
+//     if (searchTerm !== "") {
+//       return posts.filter((post) =>
+//         post.title.toLowerCase().includes(searchTerm.toLowerCase())
+//       );
+//     }
+//     return posts;
+//   }
+// );
 
 export default redditsSlice.reducer;

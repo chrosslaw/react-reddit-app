@@ -41,7 +41,7 @@ const Post = ({ post, toggleComments }) => {
             <button
               type="button"
               className={post.showComment}
-              onClick={() => toggleComments(post.permalink)}
+              onClick={() => toggleComments(post.id)}
               aria-label="Show comments"
             ></button>
 
