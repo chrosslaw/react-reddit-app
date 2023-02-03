@@ -36,7 +36,7 @@ const sliceOptions = {
     hasError: false,
     isLoading: false,
     searchTerm: "",
-    subreddits: "r/pics/",
+    subreddits: "r/popular/",
   },
   reducers: {
     setSearchTerm(state, action) {
@@ -61,24 +61,24 @@ const sliceOptions = {
       if (!state.posts[action.payload].showingComments) {
         return;
       }
-      state.posts[action.payload].isLoading = true;
-      state.posts[action.payload].hasError = false;
+      state.posts[action.payload].showingComments = true;
+      state.posts[action.payload].error = false;
     },
     [loadComments.fulfilled]: (state, action) => {
+      state.posts[action.payload.index].loadingComments = false;
+      state.posts[action.payload.index].error = false;
       state.posts[action.payload.index].comments = action.payload.comments;
-      state.posts[action.payload.index].isLoading = false;
-      state.posts[action.payload.index].hasError = false;
     },
     [loadComments.rejected]: (state, action) => {
-      state.posts[action.payload].isLoading = false;
-      state.posts[action.payload].hasError = true;
+      state.posts[action.payload].loadingComments = false;
+      state.posts[action.payload].error = true;
     },
     [loadPosts.pending]: (state, action) => {
       state.posts.isLoading = true;
       state.posts.hasError = false;
     },
     [loadPosts.fulfilled]: (state, action) => {
-      state.posts.push(action.payload);
+      state.posts = action.payload;
       state.posts.isLoading = false;
       state.posts.hasError = false;
     },

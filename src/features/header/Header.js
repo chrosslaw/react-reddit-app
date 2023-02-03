@@ -12,18 +12,17 @@ export const Header = () => {
   const dispatch = useDispatch();
 
   const onSearchChangeHandler = (e) => {
-    e.preventDefault();
-    dispatch(setSearchTerm(e.target.value));
-  };
-
-  const onSearchTermSubmit = (e) => {
-    e.preventDefault();
-    dispatch(setSearchTerm(headerSearchTerm));
+    setHeaderSearchTerm(e.target.value);
   };
 
   useEffect(() => {
     setHeaderSearchTerm(searchTerm);
   }, [searchTerm, dispatch]);
+
+  const onSearchTermSubmit = (e) => {
+    e.preventDefault();
+    dispatch(setSearchTerm(headerSearchTerm));
+  };
 
   return (
     <header>
