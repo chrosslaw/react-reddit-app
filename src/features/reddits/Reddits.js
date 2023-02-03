@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  useGetPostDataQuery,
+  useGetPostCommentsQuery,
+} from "../../api/redditAPI";
+import {
   setSearchTerm,
-  loadComments,
-  loadPosts,
   selectFilteredPosts,
+  selectSubreddits,
 } from "./redditsSlice";
 import Post from "../../components/Post/Post";
-
 import Spinner from "../../components/spinner/Spinner";
 
 export const Reddits = () => {
@@ -16,16 +18,18 @@ export const Reddits = () => {
   const posts = useSelector(selectFilteredPosts);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(loadPosts(subreddits));
-  }, [subreddits, dispatch]);
+  const { data, error, loading } = useGetPostDataQuery(posts);
 
-  const toggleComments = (index) => {
-    const getComments = (permalink) => {
-      dispatch(loadComments(index, permalink));
-    };
-    return getComments;
-  };
+  useEffect(() => {
+    dispatch();
+  }, [dispatch]);
+
+  // const toggleComments = (index) => {
+  //   const getComments = (permalink) => {
+  //     dispatch(loadComments(index, permalink));
+  //   };
+  //   return getComments;
+  // };
   if (isLoading) {
     return <div>{Array(20).fill(<Spinner />)}</div>;
   }
@@ -33,7 +37,7 @@ export const Reddits = () => {
     return (
       <div>
         <h2>Failed to load posts.</h2>
-        <button type="button" onClick={() => dispatch(loadPosts(subreddits))}>
+        <button type="button" onClick={() => dispatch(data)}>
           Load Posts
         </button>
       </div>
@@ -54,11 +58,7 @@ export const Reddits = () => {
   return (
     <div className="reddits">
       {posts.map((post, index) => (
-        <Post
-          key={post.id}
-          post={post}
-          toggleComments={toggleComments(index)}
-        />
+        <Post key={post.id} post={post} toggleComments={index} />
       ))}
     </div>
   );

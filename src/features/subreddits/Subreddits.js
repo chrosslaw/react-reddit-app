@@ -4,16 +4,16 @@ import { selectAllSubreddits } from "./subredditsSlice";
 import "./Subreddits.css";
 import { setSubreddits, selectSubreddits } from "../reddits/redditsSlice";
 import bolt from "../../images/bolt.png";
-import { useGetSubreddits } from "../../api/redditAPI";
+import { useGetSubsListQuery } from "../../api/redditAPI";
 import Spinner from "../../components/spinner/Spinner";
 
 export const Subreddits = () => {
   const dispatch = useDispatch();
-  const { data, error, isLoading } = useGetSubreddits();
+  const { data, error, isLoading } = useGetSubsListQuery();
   const selectedSubreddits = useSelector(selectSubreddits);
 
   useEffect(() => {
-    dispatch(selectSubreddits);
+    dispatch(data);
   }, [data, dispatch]);
 
   return (

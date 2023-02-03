@@ -4,31 +4,35 @@ export const redditApi = createApi({
   reducerPath: "redditApi",
   baseQuery: fetchBaseQuery({ baseUrl: "https://reddit.com/" }),
   endpoints: (builder) => ({
-    getSubreddits: builder.query({
+    getSubsList: builder.query({
       query: () => `subreddits.json`,
+    }),
+    getPostData: builder.query({
+      query: (posts) => `r/${posts}.json`,
+      transformResponse: (response) => response.data.children,
+    }),
+    getPostComments: builder.query({
+      query: (comments) => `r/${comments}.json`,
+      transformResponse: (response) => [...response[0].data.children],
     }),
   }),
 });
 
-export const { useGetSubreddits } = redditApi;
+export const {
+  useGetSubsListQuery,
+  useGetPostDataQuery,
+  useGetPostCommentsQuery,
+} = redditApi;
 
-export const ROOT = "https://reddit.com/";
-
-export const getSubredditPosts = async (subreddit) => {
-  const response = await fetch(`${ROOT}/r/${subreddit}.json`);
-  const json = await response.json();
-  return json.data.children.map((post) => post.data);
-};
-
-// export const getSubreddits = async () => {
-//   const response = await fetch(`${ROOT}subreddits.json`);
+// export const getSubredditPosts = async (subreddit) => {
+//   const response = await fetch(`${ROOT}/r/${subreddit}.json`);
 //   const json = await response.json();
-//   return json.data.children.map((subreddit) => subreddit.data);
+//   return json.data.children.map((post) => post.data);
 // };
 
-export const getPostComments = async (permalink) => {
-  const response = await fetch(`${ROOT}${permalink}.json`);
-  const json = await response.json();
+// export const getPostComments = async (permalink) => {
+//   const response = await fetch(`${ROOT}${permalink}.json`);
+//   const json = await response.json();
 
-  return json[1].data.children.map((subreddit) => subreddit.data);
-};
+//   return json[1].data.children.map((subreddit) => subreddit.data);
+// };

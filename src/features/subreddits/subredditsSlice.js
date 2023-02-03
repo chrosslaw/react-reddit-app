@@ -1,15 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { useGetSubsListQuery } from "../../api/redditAPI";
 
-const sliceOptions = {
-  name: "subreddits",
+const subredditsSlice = createSlice({
+  name: "subreddit",
   initialState: {
     subList: [],
     hasError: false,
     isLoading: false,
   },
-  reducers: {},
-};
+  reducers: {
+    addSubs: (state) => {
+      state.subList = useGetSubsListQuery;
+    },
+  },
+});
 
 export const selectAllSubreddits = (state) => state.subreddits.subList;
-export const subredditsSlice = createSlice(sliceOptions);
 export default subredditsSlice.reducer;

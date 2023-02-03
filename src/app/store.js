@@ -6,9 +6,9 @@ import { setupListeners } from "@reduxjs/toolkit/query/react";
 
 export const store = configureStore({
   reducer: {
+    [redditApi.reducerPath]: redditApi.reducer,
     reddits: redditsReducer,
     subreddits: subredditsReducer,
-    [redditApi.reducerPath]: redditApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(redditApi.middleware),
