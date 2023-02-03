@@ -1,24 +1,24 @@
-import React from "react";
-import Comment from "../comment/Comment";
+// import React, { useEffect, useState } from "react";
+import Comments from "../comment/Comments";
 import Spinner from "../spinner/Spinner";
 
-const Post = ({ post, toggleComments }) => {
+const Post = ({ post, index, toggleComments }) => {
   const renderComments = () => {
-    if (post.hasError) {
+    if (post.errorComments) {
       return (
         <div>
-          <h5>Oops, there has been an error.</h5>
+          <h5>An error occurred while loading comments.</h5>
         </div>
       );
     }
-    if (post.loading) {
+    if (post.loadingComments) {
       <Spinner />;
     }
-    if (post.showComments) {
+    if (post.showingComments) {
       return (
         <div>
           {post.comments.map((comment) => (
-            <Comment comment={comment} key={comment.id} />
+            <Comments comment={comment} key={comment.id} />
           ))}
         </div>
       );

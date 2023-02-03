@@ -7,16 +7,10 @@ import { getSubredditPosts, getPostComments } from "../../api/redditAPI";
 
 export const loadPosts = createAsyncThunk(
   "reddits/loadPosts",
-  async (dispatch) => {
-    const data = await getSubredditPosts(selectAllPosts);
-    const posts = data.map((post) => ({
-      ...post,
-      showingComments: false,
-      comments: [],
-      loadingComments: false,
-      errorComments: false,
-    }));
-    dispatch(loadPosts.fulfilled(posts));
+  async (subreddits, dispatch) => {
+    const data = await getSubredditPosts(subreddits);
+    const json = await data.json();
+    return json;
   }
 );
 
@@ -29,27 +23,27 @@ export const loadComments = createAsyncThunk(
   }
 );
 
-const sliceOptions = {
+const redditsSlice = createSlice({
   name: "reddits",
   initialState: {
     posts: [],
     hasError: false,
     isLoading: false,
     searchTerm: "",
-    subreddits: "r/popular/",
+    subreddits: "popular",
   },
   reducers: {
-    setSearchTerm(state, action) {
+    setSearchTerm: (state, action) => {
       state.searchTerm = action.payload;
     },
-    setPosts(state, action) {
+    setPosts: (state, action) => {
       state.posts = action.payload;
     },
-    setSubreddits(state, action) {
+    setSubreddits: (state, action) => {
       state.subreddits = action.payload;
       state.searchTerm = "";
     },
-    toggleCommentsSwitch(state, action) {
+    toggleCommentsSwitch: (state, action) => {
       state.posts[action.payload].showingComments =
         !state.posts[action.payload].showingComments;
     },
@@ -73,26 +67,25 @@ const sliceOptions = {
       state.posts[action.payload].loadingComments = false;
       state.posts[action.payload].error = true;
     },
-    [loadPosts.pending]: (state, action) => {
-      state.posts.isLoading = true;
-      state.posts.hasError = false;
+    [loadPosts.pending]: (state) => {
+      state.isLoading = true;
+      state.hasError = false;
     },
     [loadPosts.fulfilled]: (state, action) => {
       state.posts = action.payload;
-      state.posts.isLoading = false;
-      state.posts.hasError = false;
+      state.isLoading = false;
+      state.hasError = false;
     },
     [loadPosts.rejected]: (state) => {
-      state.posts.isLoading = false;
-      state.posts.hasError = true;
+      state.isLoading = false;
+      state.hasError = true;
     },
   },
-};
+});
 
-export const redditsSlice = createSlice(sliceOptions);
 export const { setPosts, setSubreddits, toggleCommentsSwitch, setSearchTerm } =
   redditsSlice.actions;
-const selectAllPosts = (state) => state.reddits.posts;
+export const selectAllPosts = (state) => state.reddits.posts;
 export const selectSubreddits = (state) => state.reddits.subreddits;
 export const selectSearchTerm = (state) => state.reddits.searchTerm;
 
