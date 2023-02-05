@@ -30,6 +30,7 @@ export const Reddits = () => {
   //   };
   //   return getComments;
   // };
+
   if (isLoading) {
     return <div>{Array(20).fill(<Spinner />)}</div>;
   }

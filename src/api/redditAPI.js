@@ -1,14 +1,14 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const redditApi = createApi({
-  reducerPath: "redditApi",
+export const apiSlice = createApi({
+  reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: "https://reddit.com/" }),
   endpoints: (builder) => ({
     getSubsList: builder.query({
       query: () => `subreddits.json`,
     }),
     getPostData: builder.query({
-      query: (posts) => `r/${posts}.json`,
+      query: (endpoint) => `r/${endpoint}.json`,
       transformResponse: (response) => response.data.children,
     }),
     getPostComments: builder.query({
@@ -22,7 +22,7 @@ export const {
   useGetSubsListQuery,
   useGetPostDataQuery,
   useGetPostCommentsQuery,
-} = redditApi;
+} = apiSlice;
 
 // export const getSubredditPosts = async (subreddit) => {
 //   const response = await fetch(`${ROOT}/r/${subreddit}.json`);

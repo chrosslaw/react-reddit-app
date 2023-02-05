@@ -8,11 +8,7 @@ const subredditsSlice = createSlice({
     hasError: false,
     isLoading: false,
   },
-  reducers: {
-    addSubs: (state) => {
-      state.subList = useGetSubsListQuery;
-    },
-  },
+  reducers: {},
 });
 
 export const selectAllSubreddits = (state) => state.subreddits.subList;

@@ -11,6 +11,7 @@ export const Subreddits = () => {
   const dispatch = useDispatch();
   const { data, error, isLoading } = useGetSubsListQuery();
   const selectedSubreddits = useSelector(selectSubreddits);
+  const subreddits = useSelector(selectAllSubreddits);
 
   useEffect(() => {
     dispatch(data);
