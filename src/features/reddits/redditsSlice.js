@@ -1,8 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  useGetPostDataQuery,
-  useGetPostCommentsQuery,
-} from "../../api/redditAPI";
 
 const redditsSlice = createSlice({
   name: "reddits",

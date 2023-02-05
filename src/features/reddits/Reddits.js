@@ -1,9 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  useGetPostDataQuery,
-  useGetPostCommentsQuery,
-} from "../../api/redditAPI";
+import { useGetPostDataQuery, useGetPostCommentsQuery } from "../api/apiSlice";
 import {
   setSearchTerm,
   selectFilteredPosts,

@@ -1,20 +1,21 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectAllSubreddits } from "./subredditsSlice";
+import { selectAllSubreddits, setSubList } from "./subredditsSlice";
 import "./Subreddits.css";
-import { setSubreddits, selectSubreddits } from "../reddits/redditsSlice";
 import bolt from "../../images/bolt.png";
-import { useGetSubsListQuery } from "../../api/redditAPI";
+import { useGetSubsListQuery } from "../api/apiSlice";
 import Spinner from "../../components/spinner/Spinner";
 
 export const Subreddits = () => {
   const dispatch = useDispatch();
-  const { data, error, isLoading } = useGetSubsListQuery();
-  const selectedSubreddits = useSelector(selectSubreddits);
-  const subreddits = useSelector(selectAllSubreddits);
+
+  const { data, isLoading, error } = useGetSubsListQuery();
+  const selectedSubreddits = useSelector(selectAllSubreddits);
 
   useEffect(() => {
-    dispatch(data);
+    if (data) {
+      dispatch(setSubList(data));
+    }
   }, [data, dispatch]);
 
   return (
@@ -30,12 +31,11 @@ export const Subreddits = () => {
             <a
               key={subreddit.id}
               href={subreddit.url}
-              className={`subs ${selectedSubreddits === subreddit.url}`}
+              className={`subs ${
+                selectedSubreddits === subreddit.url ? "selected" : ""
+              }`}
             >
-              <button
-                type="button"
-                onClick={() => dispatch(setSubreddits(subreddit.url))}
-              >
+              <button type="button" onClick={() => dispatch(subreddit.url)}>
                 <img
                   src={subreddit.icon_img || bolt}
                   alt={`${subreddit.display_name}`}

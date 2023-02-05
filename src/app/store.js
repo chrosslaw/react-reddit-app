@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import redditsReducer from "../features/reddits/redditsSlice";
 import subredditsReducer from "../features/subreddits/subredditsSlice";
-import { apiSlice } from "../api/redditAPI";
+import { apiSlice } from "../features/api/apiSlice";
 import { setupListeners } from "@reduxjs/toolkit/query/react";
 
 export const store = configureStore({
