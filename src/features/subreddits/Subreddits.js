@@ -1,4 +1,5 @@
 // import { useState } from "react";
+
 import "./Subreddits.css";
 import bolt from "../../images/bolt.png";
 import { useGetSubredditsQuery } from "../api/apiSlice";

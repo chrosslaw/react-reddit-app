@@ -1,28 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setSearchTerm, selectSearchTerm } from "../reddits/redditsSlice";
+// import { useState } from "react";
+
 import "./Header.css";
 import Logo from "../../images/logo.png";
 import bolt from "../../images/bolt.png";
 import boltRight from "../../images/bolt-right.png";
 
 export const Header = () => {
-  const [headerSearchTerm, setHeaderSearchTerm] = useState("");
-  const searchTerm = useSelector(selectSearchTerm);
-  const dispatch = useDispatch();
+  const onSearchChangeHandler = (e) => {};
 
-  const onSearchChangeHandler = (e) => {
-    setHeaderSearchTerm(e.target.value);
-  };
-
-  useEffect(() => {
-    setHeaderSearchTerm(searchTerm);
-  }, [searchTerm, dispatch]);
-
-  const onSearchTermSubmit = (e) => {
-    e.preventDefault();
-    dispatch(setSearchTerm(headerSearchTerm));
-  };
+  const onSearchTermSubmit = (e) => {};
 
   return (
     <header>
@@ -41,7 +27,7 @@ export const Header = () => {
         <input
           id="search"
           type="text"
-          value={headerSearchTerm}
+          // value={}
           onChange={onSearchChangeHandler}
           placeholder="Search"
           className="search"
