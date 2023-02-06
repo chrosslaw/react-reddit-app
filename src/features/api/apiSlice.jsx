@@ -3,12 +3,13 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://reddit.com/",
+    baseUrl: "https://api.reddit.com/",
+    mode: "cors",
   }),
   endpoints: (builder) => ({
     getSubreddits: builder.query({
       query: () => `subreddits.json`,
-      // transformResponse: (response) => response.data.children,
+      transformResponse: (response) => response.data.children,
     }),
     // getPostData: build.query({
     //   query: (endpoint) => `r/${endpoint}.json`,

@@ -6,8 +6,7 @@ import Spinner from "../../components/spinner/Spinner";
 
 export const Subreddits = () => {
   const { data = [], error, isLoading } = useGetSubredditsQuery();
-  console.log(data);
-  // const selectedSubreddits = useSelector(selectAllSubreddits);
+  console.log(data, error);
 
   return (
     <div>
