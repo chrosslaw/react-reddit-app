@@ -20,16 +20,16 @@ export const Subreddits = () => {
         ) : data ? (
           data.map((subreddit) => (
             <a
-              key={subreddit.id}
-              href={subreddit.url}
+              key={subreddit.data.id}
+              href={subreddit.data.url}
               className={`subs ${subreddit.url}`}
             >
               <button type="button" onClick={() => subreddit.url}>
                 <img
-                  src={subreddit.icon_img || bolt}
-                  alt={`${subreddit.display_name}`}
+                  src={subreddit.data.icon_img || bolt}
+                  alt={`${subreddit.data.display_name}`}
                 />
-                {subreddit.display_name}
+                {subreddit.data.display_name}
               </button>
             </a>
           ))
