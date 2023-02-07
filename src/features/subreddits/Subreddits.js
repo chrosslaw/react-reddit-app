@@ -1,13 +1,12 @@
 // import { useState } from "react";
-
 import "./Subreddits.css";
 import bolt from "../../images/bolt.png";
-import { useGetSubredditsQuery } from "../api/apiSlice";
+import { useGetSubredditsQuery, useGetPostsQuery } from "../api/apiSlice";
 import Spinner from "../../components/spinner/Spinner";
 
 export const Subreddits = () => {
-  const { data = [], error, isLoading } = useGetSubredditsQuery();
-  console.log(data, error);
+  const { data: subs, error, isLoading } = useGetSubredditsQuery();
+  const { data: reddits } = useGetPostsQuery();
 
   return (
     <div>
@@ -17,14 +16,14 @@ export const Subreddits = () => {
           "There was an error"
         ) : isLoading ? (
           <Spinner />
-        ) : data ? (
-          data.map((subreddit) => (
+        ) : subs ? (
+          subs.map((subreddit) => (
             <a
-              key={subreddit.data.id}
+              key={subreddit.id}
               href={subreddit.data.url}
               className={`subs ${subreddit.url}`}
             >
-              <button type="button" onClick={() => subreddit.url}>
+              <button type="button" onClick={() => reddits(subreddit.url)}>
                 <img
                   src={subreddit.data.icon_img || bolt}
                   alt={`${subreddit.data.display_name}`}
