@@ -2,6 +2,7 @@
 import Post from "../../components/Post/Post";
 import Spinner from "../../components/spinner/Spinner";
 import { useGetPostsQuery } from "../api/apiSlice";
+import "./Reddits.css";
 
 export const Reddits = () => {
   const { data: posts = [], error, isLoading } = useGetPostsQuery("popular");
@@ -26,21 +27,23 @@ export const Reddits = () => {
   // }
 
   return (
-    <div className="reddits">
+    <div className="title">
       <h1>Reddits</h1>
-      {error ? (
-        "There was an error."
-      ) : isLoading ? (
-        <Spinner />
-      ) : (
-        posts.map((post) => (
-          <Post
-            post={post.data}
+      <div className="reddits">
+        {error ? (
+          "There was an error."
+        ) : isLoading ? (
+          <Spinner />
+        ) : (
+          posts.map((post) => (
+            <Post
+              post={post.data}
 
-            // toggleComments={post.index}
-          />
-        ))
-      )}
+              // toggleComments={post.index}
+            />
+          ))
+        )}
+      </div>
     </div>
   );
 };

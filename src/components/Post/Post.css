@@ -1,0 +1,14 @@
+.post-container {
+  border: solid black 1px;
+  min-width: 44vw;
+  height: max-content;
+  height: auto;
+  margin: 20px;
+  border-radius: 14px;
+}
+.post-image {
+  width: 42vw;
+  height: auto;
+  padding: 20px;
+  border-radius: 14px;
+}

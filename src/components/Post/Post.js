@@ -1,8 +1,8 @@
-import React from "react";
 // import Comments from "../comment/Comments";
 // import Spinner from "../spinner/Spinner";
 
-const Post = ({ post, id, toggleComments }) => {
+import "./Post.css";
+const Post = ({ post, toggleComments }) => {
   // const renderComments = () => {
   //   if (post.errorComments) {
   //     return (
@@ -23,29 +23,26 @@ const Post = ({ post, id, toggleComments }) => {
   //   return null;
   // };
   return (
-    <article key={post.id}>
-      <div>
-        <div>
-          <span>
-            <h5>{post.author}</h5>
-          </span>
-          <a key={post.id} href={post.url}>
-            <img src={post.url} alt={post.subreddit} />
-          </a>
-          <span>
-            {/* <button
+    <div key={post.id} className="post-container">
+      <h2>{post.title}</h2>
+      <h5>Author: {post.author}</h5>
+
+      <a key={post.id} href={post.url} className="post-image">
+        <img src={post.url} alt={post.subreddit} />
+      </a>
+      <span>
+        {/* <button
               type="button"
               className={post.showComment}
               onClick={() => toggleComments(post.id)}
               aria-label="Show comments"
             ></button> */}
 
-            {/* {post.data.num_comments} */}
-          </span>
-        </div>
-        {/* {renderComments()} */}
-      </div>
-    </article>
+        {/* {post.data.num_comments} */}
+      </span>
+
+      {/* {renderComments()} */}
+    </div>
   );
 };
 
