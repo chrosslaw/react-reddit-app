@@ -1,7 +1,6 @@
 .reddits {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 20px;
   justify-content: space-around;
-  align-items: center;
 }

@@ -3,6 +3,8 @@
 
 import "./Post.css";
 const Post = ({ post, toggleComments }) => {
+  const { is_video, media, id, title, author, subreddit, url, permalink } =
+    post;
   // const renderComments = () => {
   //   if (post.errorComments) {
   //     return (
@@ -23,13 +25,21 @@ const Post = ({ post, toggleComments }) => {
   //   return null;
   // };
   return (
-    <div key={post.id} className="post-container">
-      <h2>{post.title}</h2>
-      <h5>Author: {post.author}</h5>
-
-      <a key={post.id} href={post.url} className="post-image">
-        <img src={post.url} alt={post.subreddit} />
-      </a>
+    <div key={id} className="post-container">
+      <h2>{title}</h2>
+      <h5>Post by: {author}</h5>
+      <p>_{subreddit}</p>
+      <div className="image-container" key={id}>
+        {is_video ? (
+          <video controls>
+            <source src={media.reddit_video.scrubber_media_url} />
+          </video>
+        ) : (
+          <a href={url} className="post-image" onClick={() => permalink}>
+            <img src={url} alt={subreddit} />
+          </a>
+        )}
+      </div>
       <span>
         {/* <button
               type="button"

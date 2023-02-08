@@ -5,26 +5,19 @@ import { useGetPostsQuery } from "../api/apiSlice";
 import "./Reddits.css";
 
 export const Reddits = () => {
-  const { data: posts = [], error, isLoading } = useGetPostsQuery("popular");
+  const { data: posts, error, isLoading } = useGetPostsQuery("popular");
   console.log(posts, error);
-  // const pop = useGetPostsQuery("popular");
-  // const toggleComments = (index) => {
-  //   const getComments = (permalink) => {
-  //     dispatch(loadComments(index, permalink));
-  //   };
-  //   return getComments;
-  // };
 
-  // if (posts.length === 0) {
-  //   return (
-  //     <div>
-  //       <h2>No posts matching {posts.data.title}</h2>
-  //       {/* <button type="button" onClick={() => pop}>
-  //         Popular
-  //       </button> */}
-  //     </div>
-  //   );
-  // }
+  if (posts.length === 0) {
+    return (
+      <div>
+        <h2>No posts matching {posts.data.title}</h2>
+        {/* <button type="button" onClick={() => pop}>
+          Popular
+        </button> */}
+      </div>
+    );
+  }
 
   return (
     <div className="title">
@@ -38,7 +31,7 @@ export const Reddits = () => {
           posts.map((post) => (
             <Post
               post={post.data}
-
+              key={post.data.id}
               // toggleComments={post.index}
             />
           ))
