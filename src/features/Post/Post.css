@@ -3,7 +3,6 @@
   min-width: 43vw;
   max-width: 40vw;
   height: auto;
-
   border-radius: 14px;
 }
 .image-container {
@@ -20,11 +19,23 @@
 .post-image img {
   height: auto;
   width: 39vw;
-
   border-radius: 14px;
-
   border: solid black 1px;
+  margin-bottom: 10px;
+}
+a .subreddit-redirect {
+  text-decoration: none;
 }
 
-@media screen {
+@media screen and (max-width: 700px) {
+  .post-container {
+    min-width: 90vw;
+    max-width: 90vw;
+  }
+
+  .image-container video,
+  .post-image img {
+    min-width: 85vw;
+    max-width: 85vw;
+  }
 }

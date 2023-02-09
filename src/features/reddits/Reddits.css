@@ -4,3 +4,11 @@
   gap: 20px;
   justify-content: space-around;
 }
+
+@media screen and (max-width: 700px) {
+  .reddits {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+  }
+}

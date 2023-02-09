@@ -3,8 +3,7 @@
 
 import "./Post.css";
 const Post = ({ post, toggleComments }) => {
-  const { is_video, media, id, title, author, subreddit, url, permalink } =
-    post;
+  const { is_video, media, id, title, author, subreddit, url } = post;
   // const renderComments = () => {
   //   if (post.errorComments) {
   //     return (
@@ -35,7 +34,7 @@ const Post = ({ post, toggleComments }) => {
             <source src={media.reddit_video.scrubber_media_url} />
           </video>
         ) : (
-          <a href={url} className="post-image" onClick={() => permalink}>
+          <a href={url} className="post-image">
             <img src={url} alt={subreddit} />
           </a>
         )}

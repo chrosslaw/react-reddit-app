@@ -7,7 +7,7 @@ export const apiSlice = createApi({
   }),
   endpoints: (builder) => ({
     getSubreddits: builder.query({
-      query: () => `subreddits.json`,
+      query: () => `subreddits`,
       transformResponse: (response) => response.data.children,
     }),
     getPosts: builder.query({
