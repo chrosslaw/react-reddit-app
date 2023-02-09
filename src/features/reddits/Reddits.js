@@ -1,18 +1,11 @@
-import { useState } from "react";
 import Post from "../Post/Post";
 import Spinner from "../../components/spinner/Spinner";
-import { useGetPostsQuery } from "../api/apiSlice";
+
 import "./Reddits.css";
 
-export const Reddits = () => {
-  const [redditPosts, setRedditPosts] = useState("Popular");
-  const { data: posts, error, isLoading } = useGetPostsQuery(redditPosts);
-  console.log(posts, error);
-
-  const changeReddits = (e) => {
-    setRedditPosts(e.target.value);
-  };
-
+export const Reddits = ({ posts, changeReddits, redditPosts }) => {
+  console.log("!!!!!", posts);
+  const { isLoading, error } = posts;
   // if (posts.length === 0) {
   //   return (
   //     <div>
@@ -26,7 +19,7 @@ export const Reddits = () => {
 
   return (
     <div className="title">
-      <h1>{redditPosts} Reddits</h1>
+      <h1> {redditPosts} Reddits</h1>
       <div className="reddits">
         {error ? (
           "There was an error."
@@ -35,8 +28,8 @@ export const Reddits = () => {
         ) : (
           posts.map((post) => (
             <Post
-              post={post.data}
               key={post.data.id}
+              post={post.data}
               changeReddits={changeReddits}
               // toggleComments={post.index}
             />

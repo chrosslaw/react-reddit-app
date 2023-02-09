@@ -1,17 +1,13 @@
 // import { useState } from "react";
 import "./Subreddits.css";
 import bolt from "../../images/bolt.png";
-import { useGetSubredditsQuery } from "../api/apiSlice";
 import Spinner from "../../components/spinner/Spinner";
 
-export const Subreddits = () => {
-  const { data: subs, error, isLoading } = useGetSubredditsQuery();
-
-  console.log("SUBS", subs);
-
+export const Subreddits = ({ subs, changeReddits }) => {
+  const { isLoading, error } = subs;
   return (
     <div className="subreddits-container">
-      <h1 className="subs">Subreddits</h1>
+      <h1 className="subs"> Subreddits</h1>
       <ul className="subreddits">
         {error ? (
           "There was an error"
