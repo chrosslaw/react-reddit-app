@@ -3,7 +3,17 @@
 
 import "./Post.css";
 const Post = ({ post, toggleComments }) => {
-  const { is_video, media, id, title, author, subreddit, url } = post;
+  const {
+    id,
+    is_self,
+    selftext,
+    is_video,
+    media,
+    title,
+    author,
+    subreddit,
+    url,
+  } = post;
   // const renderComments = () => {
   //   if (post.errorComments) {
   //     return (
@@ -28,11 +38,15 @@ const Post = ({ post, toggleComments }) => {
       <h2>{title}</h2>
       <h5>Post by: {author}</h5>
       <p>_{subreddit}</p>
-      <div className="image-container" key={id}>
+      <div className="image-container">
         {is_video ? (
-          <video controls>
-            <source src={media.reddit_video.scrubber_media_url} />
-          </video>
+          <div className="video-container">
+            <video controls className="video">
+              <source src={media.reddit_video.scrubber_media_url} />
+            </video>
+          </div>
+        ) : is_self ? (
+          <p>{selftext}</p>
         ) : (
           <a href={url} className="post-image">
             <img src={url} alt={subreddit} />

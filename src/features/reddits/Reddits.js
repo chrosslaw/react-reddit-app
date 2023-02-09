@@ -4,7 +4,6 @@ import Spinner from "../../components/spinner/Spinner";
 import "./Reddits.css";
 
 export const Reddits = ({ posts, redditPosts, setRedditPosts }) => {
-  console.log("!!!!!", posts);
   const { isLoading, error } = posts;
   // if (posts.length === 0) {
   //   return (
@@ -20,6 +19,7 @@ export const Reddits = ({ posts, redditPosts, setRedditPosts }) => {
   return (
     <div className="title">
       <h1> {redditPosts} Reddits</h1>
+      <p></p>
       <div className="reddits">
         {error ? (
           "There was an error."

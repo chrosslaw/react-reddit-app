@@ -3,11 +3,11 @@ import "./Subreddits.css";
 import bolt from "../../images/bolt.png";
 import Spinner from "../../components/spinner/Spinner";
 
-export const Subreddits = ({ subs, changeReddits }) => {
+export const Subreddits = ({ subs }) => {
   const { isLoading, error } = subs;
   return (
     <div className="subreddits-container">
-      <h1 className="subs"> Subreddits</h1>
+      <h1> Subreddits</h1>
       <ul className="subreddits">
         {error ? (
           "There was an error"
@@ -17,7 +17,7 @@ export const Subreddits = ({ subs, changeReddits }) => {
           subs.map((subreddit) => (
             <li
               key={subreddit.data.id}
-              className={`subs ${subreddit.data.url}`}
+              className={`list-item ${subreddit.data.url}`}
             >
               <button type="button">
                 <img
