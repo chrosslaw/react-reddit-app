@@ -5,14 +5,17 @@ import bolt from "../../images/bolt.png";
 import boltRight from "../../images/bolt-right.png";
 // import { changeReddits } from "../reddits/Reddits";
 
-export const Header = () => {
+export const Header = ({ setRedditPosts }) => {
   const [searchTerm, setSearchTerm] = useState("");
+
   const onSearchChangeHandler = (e) => {
     setSearchTerm(e.target.value);
   };
 
   const onSearchTermSubmit = (e) => {
-    e.changeReddits(searchTerm);
+    e.preventDefault();
+    setRedditPosts(searchTerm);
+    setSearchTerm("");
   };
 
   return (
@@ -39,10 +42,13 @@ export const Header = () => {
         />
 
         <button
+          onClick={onSearchTermSubmit}
           type="submit"
           id="search-clear-button"
           className="search-button"
           aria-label="Search"
+
+          // href={`${subreddit_name_prefixed}`}
         >
           🔎
         </button>

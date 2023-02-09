@@ -9,19 +9,16 @@ const Home = () => {
   const [redditPosts, setRedditPosts] = useState("Popular");
   const { data: subs = [] } = useGetSubredditsQuery();
   const { data: posts = [] } = useGetPostsQuery(redditPosts);
-  console.log("!!", posts);
-  const changeReddits = (e) => {
-    setRedditPosts(e.target.value);
-  };
+  console.log("!!", subs);
 
   return (
     <div>
-      <Header posts={posts} changeReddits={changeReddits} />
-      <Subreddits subs={subs} changeReddits={changeReddits} />
+      <Header posts={posts} setRedditPosts={setRedditPosts} />
+      <Subreddits subs={subs} setRedditPosts={setRedditPosts} />
       <Reddits
         posts={posts}
-        changeReddits={changeReddits}
         redditPosts={redditPosts}
+        setRedditPosts={setRedditPosts}
       />
     </div>
   );

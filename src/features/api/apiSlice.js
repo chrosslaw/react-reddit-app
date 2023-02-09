@@ -11,13 +11,9 @@ export const apiSlice = createApi({
       transformResponse: (response) => response.data.children,
     }),
     getPosts: builder.query({
-      query: (searchTerm) => `r/${searchTerm}.json`,
+      query: (posts) => `r/${posts}.json`,
       transformResponse: (response) => response.data.children,
     }),
-    // getPostComments: builder.query({
-    //   query: (URI) => `r/${URI}.json`,
-    //   transformResponse: (response) => [...response[0].data.children],
-    // }),
   }),
 });
 export const {

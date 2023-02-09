@@ -3,7 +3,7 @@ import Spinner from "../../components/spinner/Spinner";
 
 import "./Reddits.css";
 
-export const Reddits = ({ posts, changeReddits, redditPosts }) => {
+export const Reddits = ({ posts, redditPosts, setRedditPosts }) => {
   console.log("!!!!!", posts);
   const { isLoading, error } = posts;
   // if (posts.length === 0) {
@@ -30,7 +30,7 @@ export const Reddits = ({ posts, changeReddits, redditPosts }) => {
             <Post
               key={post.data.id}
               post={post.data}
-              changeReddits={changeReddits}
+              setRedditPosts={setRedditPosts}
               // toggleComments={post.index}
             />
           ))
