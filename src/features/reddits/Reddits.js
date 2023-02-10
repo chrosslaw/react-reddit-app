@@ -18,7 +18,7 @@ export const Reddits = ({ posts, redditPosts, setRedditPosts }) => {
 
   return (
     <div className="title">
-      <h1> {redditPosts} Reddits</h1>
+      <h1> {redditPosts} </h1>
 
       <div className="reddits">
         {error ? (
@@ -31,6 +31,7 @@ export const Reddits = ({ posts, redditPosts, setRedditPosts }) => {
               key={post.data.id}
               post={post.data}
               setRedditPosts={setRedditPosts}
+              isLoading={isLoading}
               // toggleComments={post.index}
             />
           ))

@@ -1,21 +1,32 @@
 .post-container {
-  border: outset;
-  min-width: 40vw;
+  min-width: 50vw;
   max-width: 50vw;
   height: auto;
   border-radius: 14px;
   padding: 20px;
   margin-top: 25px;
-  box-shadow: 0px 1px 2px 0px rgba(248, 39, 53, 0.7),
-    1px 2px 4px 0px rgba(248, 39, 53, 0.7),
-    2px 4px 8px 0px rgba(248, 39, 53, 0.7),
-    2px 4px 16px 0px rgba(248, 39, 53, 0.7);
+
+  box-shadow: -5px -5px 9px rgba(248, 39, 53, 0.7),
+    -5px -5px 9px rgba(248, 39, 53, 0.7), -5px -5px 9px rgba(248, 39, 53, 0.7),
+    -5px -5px 9px rgba(248, 39, 53, 0.7);
 }
 .post-container h2,
 .post-container p {
   padding: 0px 10px;
 }
-.image-container {
+.post-container button {
+  height: auto;
+  cursor: pointer;
+  text-align: center;
+  align-items: center;
+  background-color: black;
+  border: none;
+
+  text-decoration: none;
+  color: white;
+  margin-bottom: 10px;
+}
+.media-container {
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -34,7 +45,9 @@
   top: 0;
   left: 0;
 }
-
+.post-url {
+  margin: 10px;
+}
 .post-image img {
   height: auto;
   width: 80%;
@@ -45,14 +58,26 @@
 a .subreddit-redirect {
   text-decoration: none;
 }
+div .subreddits {
+  margin: 10px 0px;
+}
+.selftext-container {
+  font-size: 20px;
+  line-height: 1.5;
+  max-width: 45vw;
+  word-wrap: break-word;
+  padding: 10px;
+  width: max-content;
+  border-radius: 14px;
+}
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 800px) {
   .post-container {
     min-width: 90vw;
     max-width: 90vw;
   }
 
-  .image-container video,
+  .media-container video,
   .post-image img {
     min-width: 70vw;
     max-width: 85vw;

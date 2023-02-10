@@ -1,19 +1,23 @@
 // import Comments from "../comment/Comments";
-// import Spinner from "../spinner/Spinner";
 
 import "./Post.css";
-const Post = ({ post, toggleComments }) => {
+const Post = ({ post, setRedditPosts }) => {
   const {
     id,
     is_self,
     selftext,
     is_video,
     media,
+    is_reddit_media_domain,
     title,
     author,
     subreddit,
     url,
   } = post;
+  const handleClick = (e) => {
+    e.preventDefault();
+    setRedditPosts(e.target.value);
+  };
   // const renderComments = () => {
   //   if (post.errorComments) {
   //     return (
@@ -37,8 +41,10 @@ const Post = ({ post, toggleComments }) => {
     <div key={id} className="post-container">
       <h2>{title}</h2>
       <h5>Post by: {author}</h5>
-      <p>_{subreddit}</p>
-      <div className="image-container">
+      <button value={subreddit} onClick={handleClick}>
+        <em>_{subreddit}</em>
+      </button>
+      <div className="media-container">
         {is_video ? (
           <div className="video-container">
             <video controls className="video">
@@ -46,10 +52,16 @@ const Post = ({ post, toggleComments }) => {
             </video>
           </div>
         ) : is_self ? (
-          <p>{selftext}</p>
-        ) : (
+          <div className="selftext-container">
+            <blockquote>{selftext}</blockquote>
+          </div>
+        ) : is_reddit_media_domain ? (
           <a href={url} className="post-image">
             <img src={url} alt={subreddit} />
+          </a>
+        ) : (
+          <a className="post-url" href={url}>
+            Check it out at: {url}
           </a>
         )}
       </div>

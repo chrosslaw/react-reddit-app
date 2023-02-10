@@ -10,13 +10,17 @@ const Home = () => {
 
   const { data: subs = [] } = useGetSubredditsQuery();
   const { data: posts = [] } = useGetPostsQuery(redditPosts);
+  const handleClick = (e) => {
+    e.preventDefault();
+    setRedditPosts(e.target.value);
+  };
 
-  console.log("!!", subs);
-  console.log("!!!!!", posts);
+  console.log("subs", subs);
+  console.log("posts", posts);
   return (
     <div>
       <Header posts={posts} setRedditPosts={setRedditPosts} />
-      <Subreddits subs={subs} setRedditPosts={setRedditPosts} />
+      <Subreddits subs={subs} handleClick={handleClick} />
       <Reddits
         posts={posts}
         redditPosts={redditPosts}
