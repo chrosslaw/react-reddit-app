@@ -19,7 +19,7 @@ export const Reddits = ({ posts, redditPosts, setRedditPosts }) => {
   return (
     <div className="title">
       <h1> {redditPosts} Reddits</h1>
-      <p></p>
+
       <div className="reddits">
         {error ? (
           "There was an error."
