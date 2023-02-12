@@ -7,20 +7,17 @@ import { useGetSubredditsQuery, useGetPostsQuery } from "../api/apiSlice";
 
 const Home = () => {
   const [redditPosts, setRedditPosts] = useState("Popular");
-
+  //
   const { data: subs = [] } = useGetSubredditsQuery();
+
   const { data: posts = [] } = useGetPostsQuery(redditPosts);
-  const handleClick = (e) => {
-    e.preventDefault();
-    setRedditPosts(e.target.value);
-  };
 
   console.log("subs", subs);
   console.log("posts", posts);
   return (
     <div>
-      <Header posts={posts} setRedditPosts={setRedditPosts} />
-      <Subreddits subs={subs} handleClick={handleClick} />
+      <Header setRedditPosts={setRedditPosts} />
+      <Subreddits subs={subs} setRedditPosts={setRedditPosts} />
       <Reddits
         posts={posts}
         redditPosts={redditPosts}

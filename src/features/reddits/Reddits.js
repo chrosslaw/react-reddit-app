@@ -1,20 +1,10 @@
-import Post from "../Post/Post";
+import Post from "../post/Post";
 import Spinner from "../../components/spinner/Spinner";
 
 import "./Reddits.css";
 
 export const Reddits = ({ posts, redditPosts, setRedditPosts }) => {
   const { isLoading, error } = posts;
-  // if (posts.length === 0) {
-  //   return (
-  //     <div>
-  //       <h2>No posts matching {posts.data.title}</h2>
-  //       {/* <button type="button" onClick={() => pop}>
-  //         Popular
-  //       </button> */}
-  //     </div>
-  //   );
-  // }
 
   return (
     <div className="title">
@@ -30,9 +20,8 @@ export const Reddits = ({ posts, redditPosts, setRedditPosts }) => {
             <Post
               key={post.data.id}
               post={post.data}
+              redditPosts={redditPosts}
               setRedditPosts={setRedditPosts}
-              isLoading={isLoading}
-              // toggleComments={post.index}
             />
           ))
         )}

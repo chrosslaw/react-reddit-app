@@ -1,13 +1,11 @@
-import { useState } from "react";
 import "./Header.css";
+import { useState } from "react";
 import Logo from "../../images/logo.png";
 import bolt from "../../images/bolt.png";
 import boltRight from "../../images/bolt-right.png";
-// import { changeReddits } from "../reddits/Reddits";
 
-export const Header = ({ posts, setRedditPosts }) => {
+export const Header = ({ setRedditPosts }) => {
   const [searchTerm, setSearchTerm] = useState("");
-
   const onSearchChangeHandler = (e) => {
     setSearchTerm(e.target.value);
   };
@@ -15,6 +13,7 @@ export const Header = ({ posts, setRedditPosts }) => {
   const onSearchTermSubmit = (e) => {
     e.preventDefault();
     setRedditPosts(searchTerm);
+
     setSearchTerm("");
   };
 
@@ -42,7 +41,6 @@ export const Header = ({ posts, setRedditPosts }) => {
         />
 
         <button
-          onClick={onSearchTermSubmit}
           type="submit"
           id="search-clear-button"
           className="search-button"

@@ -3,7 +3,7 @@ import "./Subreddits.css";
 import bolt from "../../images/bolt.png";
 import Spinner from "../../components/spinner/Spinner";
 
-export const Subreddits = ({ subs, handleClick }) => {
+export const Subreddits = ({ subs, setRedditPosts }) => {
   const { isLoading, error } = subs;
 
   return (
@@ -23,8 +23,9 @@ export const Subreddits = ({ subs, handleClick }) => {
               <button
                 className="sub-button"
                 type="button"
-                value={subreddit.data.display_name}
-                onClick={handleClick}
+                onClick={() => {
+                  setRedditPosts(subreddit.data.display_name);
+                }}
               >
                 <img
                   src={subreddit.data.icon_img || bolt}
