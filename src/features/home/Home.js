@@ -6,17 +6,17 @@ import Reddits from "../reddits/Reddits";
 import { useGetSubredditsQuery } from "../api/apiSlice";
 
 const Home = () => {
+  //initially query Popular posts
   const [redditPosts, setRedditPosts] = useState("Popular");
   const [searchTerm, setSearchTerm] = useState("");
-
+  //List of Subreddits
   const { data: subs = [] } = useGetSubredditsQuery("subreddits");
   const { data: searchList = [] } = useGetSubredditsQuery(
+    //Search Query
     `search.json?q=${searchTerm}`
   );
+  //list of Reddit Posts
   const { data: posts = [] } = useGetSubredditsQuery(`r/${redditPosts}`);
-  console.log(searchTerm, searchList);
-  console.log("subs", subs);
-  console.log("posts", posts);
   return (
     <div>
       <Header setRedditPosts={setRedditPosts} setSearchTerm={setSearchTerm} />

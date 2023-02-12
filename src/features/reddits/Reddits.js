@@ -15,14 +15,15 @@ export const Reddits = ({
 
   return (
     <div className="title">
-      <h1> {redditPosts} </h1>
-
+      {/*always display the current posts title or search term*/}
+      <h1>{searchTerm !== "" ? `Results for: ${searchTerm}` : redditPosts} </h1>
       <div className="reddits">
         {error ? (
           "There was an error."
         ) : isLoading ? (
           <Spinner />
         ) : (
+          // Display the search list posts or the selected posts.
           (searchTerm === "" ? posts : searchList).map((post) => (
             <Post
               key={post.data.id}
