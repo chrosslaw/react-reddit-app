@@ -1,4 +1,4 @@
-// import { useState } from "react";
+import React from "react";
 import "./Subreddits.css";
 import bolt from "../../images/bolt.png";
 import Spinner from "../../components/spinner/Spinner";
@@ -8,7 +8,7 @@ export const Subreddits = ({ subs, setRedditPosts, setSearchTerm }) => {
 
   return (
     <div className="subreddits-container">
-      <h1> Subreddits</h1>
+      <h1> Popular Subreddits</h1>
       <ul className="subreddits">
         {error ? (
           "Oops, there was an error"

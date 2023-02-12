@@ -1,5 +1,8 @@
-// import Comments from "../comment/Comments";
-
+import React, { useState } from "react";
+import Comment from "../comment/Comment";
+import Gallery from "../gallery/Gallery";
+import { useGetSubredditsQuery } from "../api/apiSlice";
+import Spinner from "../../components/spinner/Spinner";
 import "./Post.css";
 
 const Post = ({ post, setRedditPosts, setSearchTerm }) => {
@@ -14,9 +17,29 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
     author,
     subreddit,
     url,
-    num_comments,
-    showComment,
+    is_gallery,
+    permalink,
   } = post;
+
+  const [commentsShowing, setCommentsShowing] = useState(false);
+
+  // const showComments = () => {
+  //   return (
+  //     <div id="comments">
+  //       {error ? (
+  //         "There was an error loading the comments."
+  //       ) : isLoading ? (
+  //         <Spinner />
+  //       ) : commentsShowing ? (
+  //         <div>
+  //           {post.comments.map((comment) => (
+  //             <Comment comment={comment} key={id} />
+  //           ))}
+  //         </div>
+  //       ) : null}
+  //     </div>
+  //   );
+  // };
 
   return (
     <div key={id} className="post-container">
@@ -44,9 +67,15 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
             <p>{selftext}</p>
           </div>
         ) : is_reddit_media_domain ? (
-          <a href={url} className="post-image">
-            <img src={url} alt={subreddit} />
-          </a>
+          <div>
+            <a href={url} className="post-image">
+              <img src={url} alt={subreddit} />
+            </a>
+          </div>
+        ) : is_gallery ? (
+          <div>
+            <Gallery />
+          </div>
         ) : (
           <div className="post-url" href={url}>
             <a href={url}>
@@ -54,17 +83,9 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
             </a>
           </div>
         )}
+        {/* <button onClick={toggleComments}> Show Comments</button>
+        <div id="comments">{showComments()}</div> */}
       </div>
-      <span>
-        <button
-          type="button"
-          className={showComment}
-          onClick={() => post.id}
-          aria-label="Show comments"
-        ></button>
-
-        {num_comments}
-      </span>
     </div>
   );
 };
