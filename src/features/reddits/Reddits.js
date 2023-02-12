@@ -3,7 +3,14 @@ import Spinner from "../../components/spinner/Spinner";
 
 import "./Reddits.css";
 
-export const Reddits = ({ posts, redditPosts, setRedditPosts }) => {
+export const Reddits = ({
+  posts,
+  redditPosts,
+  setRedditPosts,
+  searchTerm,
+  setSearchTerm,
+  searchList,
+}) => {
   const { isLoading, error } = posts;
 
   return (
@@ -16,12 +23,13 @@ export const Reddits = ({ posts, redditPosts, setRedditPosts }) => {
         ) : isLoading ? (
           <Spinner />
         ) : (
-          posts.map((post) => (
+          (searchTerm === "" ? posts : searchList).map((post) => (
             <Post
               key={post.data.id}
               post={post.data}
               redditPosts={redditPosts}
               setRedditPosts={setRedditPosts}
+              setSearchTerm={setSearchTerm}
             />
           ))
         )}

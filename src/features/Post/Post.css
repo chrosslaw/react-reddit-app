@@ -5,7 +5,7 @@
   border-radius: 14px;
   padding: 20px;
   margin-top: 25px;
-
+  background-color: rgb(80, 80, 80);
   box-shadow: -5px -5px 9px rgba(248, 39, 53, 0.7),
     -5px -5px 9px rgba(248, 39, 53, 0.7), -5px -5px 9px rgba(248, 39, 53, 0.7),
     -5px -5px 9px rgba(248, 39, 53, 0.7);
@@ -19,7 +19,7 @@
   cursor: pointer;
   text-align: center;
   align-items: center;
-  background-color: black;
+  background-color: rgb(80, 80, 80);
   border: none;
 
   text-decoration: none;
@@ -45,8 +45,10 @@
   top: 0;
   left: 0;
 }
-.post-url {
+.post-url a {
   margin: 10px;
+
+  color: black;
 }
 .post-image img {
   height: auto;

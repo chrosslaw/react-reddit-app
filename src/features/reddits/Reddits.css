@@ -2,7 +2,7 @@
   display: flex;
   flex-flow: column wrap;
   align-items: center;
-  background-color: black;
+  background-color: rgb(30, 30, 30);
   justify-content: space-around;
   color: whitesmoke;
   margin: 0px;
@@ -16,7 +16,7 @@
 }
 .title h1 {
   color: whitesmoke;
-  background-color: slategray;
+  background-color: black;
   border: outset;
 
   margin: 0px;

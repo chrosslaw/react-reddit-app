@@ -7,18 +7,9 @@ export const apiSlice = createApi({
   }),
   endpoints: (builder) => ({
     getSubreddits: builder.query({
-      query: () => `subreddits.json`,
+      query: (subreddits) => `${subreddits}.json`,
       transformResponse: (response) => response.data.children,
     }),
-    getPosts: builder.query({
-      query: (posts) => `r/${posts}.json`,
-      transformResponse: (response) => response.data.children,
-    }),
-    // searchPosts: builder.query({
-    //   query: (searchTerm) => `search?q=${searchTerm}`,
-    //   transformResponse: (response) => response.data.children,
-    // }),
   }),
 });
-export const { useGetSubredditsQuery, useGetPostsQuery, useSearchPostsQuery } =
-  apiSlice;
+export const { useGetSubredditsQuery } = apiSlice;

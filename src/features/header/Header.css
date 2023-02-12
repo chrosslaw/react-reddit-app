@@ -1,7 +1,7 @@
 header {
   display: flex;
   height: min-content;
-  background-color: black;
+  background-color: rgb(30, 30, 30);
   justify-content: center;
   align-items: flex-start;
   align-items: center;

@@ -3,7 +3,7 @@ import "./Subreddits.css";
 import bolt from "../../images/bolt.png";
 import Spinner from "../../components/spinner/Spinner";
 
-export const Subreddits = ({ subs, setRedditPosts }) => {
+export const Subreddits = ({ subs, setRedditPosts, setSearchTerm }) => {
   const { isLoading, error } = subs;
 
   return (
@@ -24,6 +24,7 @@ export const Subreddits = ({ subs, setRedditPosts }) => {
                 className="sub-button"
                 type="button"
                 onClick={() => {
+                  setSearchTerm("");
                   setRedditPosts(subreddit.data.display_name);
                 }}
               >

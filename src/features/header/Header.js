@@ -4,17 +4,16 @@ import Logo from "../../images/logo.png";
 import bolt from "../../images/bolt.png";
 import boltRight from "../../images/bolt-right.png";
 
-export const Header = ({ setRedditPosts }) => {
-  const [searchTerm, setSearchTerm] = useState("");
+export const Header = ({ setRedditPosts, setSearchTerm }) => {
+  const [searchInput, setSearchInput] = useState("");
   const onSearchChangeHandler = (e) => {
-    setSearchTerm(e.target.value);
+    setSearchInput(e.target.value);
   };
 
-  const onSearchTermSubmit = (e) => {
+  const onSearchInputSubmit = (e) => {
     e.preventDefault();
-    setRedditPosts(searchTerm);
-
-    setSearchTerm("");
+    setSearchTerm(searchInput);
+    setSearchInput("");
   };
 
   return (
@@ -30,11 +29,11 @@ export const Header = ({ setRedditPosts }) => {
           <img src={boltRight} alt="rightBolt" height={50} width={50} />
         </span>
       </div>
-      <form className="search-form" onSubmit={onSearchTermSubmit}>
+      <form className="search-form" onSubmit={onSearchInputSubmit}>
         <input
           id="search"
           type="text"
-          value={searchTerm}
+          value={searchInput}
           onChange={onSearchChangeHandler}
           placeholder="Search"
           className="search"

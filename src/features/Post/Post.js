@@ -2,7 +2,7 @@
 
 import "./Post.css";
 
-const Post = ({ post, setRedditPosts }) => {
+const Post = ({ post, setRedditPosts, setSearchTerm }) => {
   const {
     id,
     is_self,
@@ -22,6 +22,7 @@ const Post = ({ post, setRedditPosts }) => {
       <h5>Post by: {author}</h5>
       <button
         onClick={() => {
+          setSearchTerm("");
           setRedditPosts(subreddit);
         }}
       >
@@ -45,7 +46,9 @@ const Post = ({ post, setRedditPosts }) => {
           </a>
         ) : (
           <a className="post-url" href={url}>
-            <b>Check it out at: </b> {url}
+            <a href={url}>
+              <b>Check it out at here </b>
+            </a>
           </a>
         )}
       </div>
