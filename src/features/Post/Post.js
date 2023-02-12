@@ -14,6 +14,8 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
     author,
     subreddit,
     url,
+    num_comments,
+    showComment,
   } = post;
 
   return (
@@ -22,6 +24,7 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
       <h5>Post by: {author}</h5>
       <button
         onClick={() => {
+          //if search term is currently used, clear it out. Then query the clicked post name
           setSearchTerm("");
           setRedditPosts(subreddit);
         }}
@@ -45,22 +48,22 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
             <img src={url} alt={subreddit} />
           </a>
         ) : (
-          <a className="post-url" href={url}>
+          <div className="post-url" href={url}>
             <a href={url}>
               <b>Check it out at here </b>
             </a>
-          </a>
+          </div>
         )}
       </div>
       <span>
-        {/* <button
-              type="button"
-              className={post.showComment}
-              onClick={() => toggleComments(post.id)}
-              aria-label="Show comments"
-            ></button> */}
+        <button
+          type="button"
+          className={showComment}
+          onClick={() => post.id}
+          aria-label="Show comments"
+        ></button>
 
-        {/* {post.data.num_comments} */}
+        {num_comments}
       </span>
     </div>
   );

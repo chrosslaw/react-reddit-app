@@ -24,7 +24,7 @@ export const Header = ({ setRedditPosts, setSearchTerm }) => {
         <span className="heading">
           <img src={bolt} alt="bolt" height={50} width={50} />
 
-          <h1>RedditCharged</h1>
+          <h1>Reddit Charged</h1>
 
           <img src={boltRight} alt="rightBolt" height={50} width={50} />
         </span>
@@ -44,8 +44,6 @@ export const Header = ({ setRedditPosts, setSearchTerm }) => {
           id="search-clear-button"
           className="search-button"
           aria-label="Search"
-
-          // href={`${subreddit_name_prefixed}`}
         >
           🔎
         </button>

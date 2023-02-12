@@ -11,7 +11,7 @@ export const Subreddits = ({ subs, setRedditPosts, setSearchTerm }) => {
       <h1> Subreddits</h1>
       <ul className="subreddits">
         {error ? (
-          "There was an error"
+          "Oops, there was an error"
         ) : isLoading ? (
           <Spinner />
         ) : subs ? (
@@ -24,12 +24,16 @@ export const Subreddits = ({ subs, setRedditPosts, setSearchTerm }) => {
                 className="sub-button"
                 type="button"
                 onClick={() => {
+                  //if search term is currently used, clear it out. Then query the clicked post name
                   setSearchTerm("");
                   setRedditPosts(subreddit.data.display_name);
                 }}
               >
                 <img
-                  src={subreddit.data.icon_img || bolt}
+                  src={
+                    //if there isn't an icon_image, default to bolt
+                    subreddit.data.icon_img || bolt
+                  }
                   alt={`${subreddit.data.display_name}`}
                 />
                 {` ${subreddit.data.display_name}`}

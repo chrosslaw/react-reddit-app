@@ -15,8 +15,12 @@ export const Reddits = ({
 
   return (
     <div className="title">
-      {/*always display the current posts title or search term*/}
-      <h1>{searchTerm !== "" ? `Results for: ${searchTerm}` : redditPosts} </h1>
+      <h1>
+        {
+          //always display the current posts title or search term
+          searchTerm !== "" ? `Results for: ${searchTerm}` : redditPosts
+        }{" "}
+      </h1>
       <div className="reddits">
         {error ? (
           "There was an error."
