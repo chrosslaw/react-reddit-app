@@ -20,9 +20,9 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
     is_gallery,
     permalink,
   } = post;
-
   const [commentsShowing, setCommentsShowing] = useState(false);
-
+  const [commentQuery, setCommentQuery] = useState("");
+  const { data: commentList = [] } = useGetSubredditsQuery(commentQuery);
   // const showComments = () => {
   //   return (
   //     <div id="comments">
@@ -64,7 +64,7 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
           </div>
         ) : is_self ? (
           <div className="selftext-container">
-            <p>{selftext}</p>
+            {selftext.length < 400 ? selftext : `${selftext.slice(0, 400)}`}
           </div>
         ) : is_reddit_media_domain ? (
           <div>

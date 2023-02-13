@@ -1,5 +1,4 @@
 import React from "react";
-import { useGetSubredditsQuery } from "../api/apiSlice";
 
 const Comments = ({ post, id }) => {
   // {error ? (

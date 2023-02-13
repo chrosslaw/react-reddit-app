@@ -9,7 +9,6 @@ const Home = () => {
   //initially query - Popular posts
   const [redditPosts, setRedditPosts] = useState("Popular");
   const [searchTerm, setSearchTerm] = useState("");
-  const [commentQuery, setCommentQuery] = useState("");
 
   //List of Subreddits
   // const popList = [
@@ -27,10 +26,6 @@ const Home = () => {
   );
   //list of Reddit Posts
   const { data: posts = [] } = useGetSubredditsQuery(`r/${redditPosts}`);
-  const { data: commentList = [] } = useGetSubredditsQuery(commentQuery);
-  // const toggleComments = () => {
-
-  // };
 
   console.log(posts);
   return (

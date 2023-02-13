@@ -1,5 +1,5 @@
 import React from "react";
-import Post from "../post/Post";
+import Post from "../Post/Post";
 import Spinner from "../../components/spinner/Spinner";
 
 import "./Reddits.css";
