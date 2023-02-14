@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Comment from "../comment/Comment";
+import Comment from "../api/Comment";
 import Gallery from "../gallery/Gallery";
-import { useGetSubredditsQuery } from "../api/apiSlice";
+import { useGetCommentsQuery } from "../api/apiSlice";
 import Spinner from "../../components/spinner/Spinner";
 import "./Post.css";
 
@@ -20,9 +20,11 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
     is_gallery,
     permalink,
   } = post;
+  const data = useGetCommentsQuery(permalink);
+  const comments = data;
+  console.log("post", comments);
   const [commentsShowing, setCommentsShowing] = useState(false);
-  const [commentQuery, setCommentQuery] = useState("");
-  const { data: commentList = [] } = useGetSubredditsQuery(commentQuery);
+
   // const showComments = () => {
   //   return (
   //     <div id="comments">
@@ -83,6 +85,9 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
             </a>
           </div>
         )}
+        <span>
+          <Comment post={post} />
+        </span>
         {/* <button onClick={toggleComments}> Show Comments</button>
         <div id="comments">{showComments()}</div> */}
       </div>

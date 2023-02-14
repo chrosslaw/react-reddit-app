@@ -1,5 +1,5 @@
 import React from "react";
-import Post from "../Post/Post";
+import Post from "../post/Post";
 import Spinner from "../../components/spinner/Spinner";
 
 import "./Reddits.css";
@@ -13,7 +13,7 @@ export const Reddits = ({
   searchList,
 }) => {
   const { isLoading, error } = posts;
-
+  console.log("posts", posts);
   return (
     <div className="title">
       <h1>

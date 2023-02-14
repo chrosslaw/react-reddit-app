@@ -10,6 +10,10 @@ export const apiSlice = createApi({
       query: (subreddits) => `${subreddits}.json`,
       transformResponse: (response) => response.data.children,
     }),
+    getComments: builder.query({
+      query: (permalink) => `${permalink}.json`,
+      transformResponse: (response) => response[1].data.children,
+    }),
   }),
 });
-export const { useGetSubredditsQuery } = apiSlice;
+export const { useGetSubredditsQuery, useGetCommentsQuery } = apiSlice;
