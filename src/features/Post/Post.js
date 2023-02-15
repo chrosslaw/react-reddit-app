@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Comment from "../api/Comment";
+import Comment from "../comment/Comment";
 import Gallery from "../gallery/Gallery";
 import { useGetCommentsQuery } from "../api/apiSlice";
 import Spinner from "../../components/spinner/Spinner";
@@ -20,28 +20,9 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
     is_gallery,
     permalink,
   } = post;
-  const data = useGetCommentsQuery(permalink);
-  const comments = data;
+  const comments = useGetCommentsQuery(permalink);
   console.log("post", comments);
   const [commentsShowing, setCommentsShowing] = useState(false);
-
-  // const showComments = () => {
-  //   return (
-  //     <div id="comments">
-  //       {error ? (
-  //         "There was an error loading the comments."
-  //       ) : isLoading ? (
-  //         <Spinner />
-  //       ) : commentsShowing ? (
-  //         <div>
-  //           {post.comments.map((comment) => (
-  //             <Comment comment={comment} key={id} />
-  //           ))}
-  //         </div>
-  //       ) : null}
-  //     </div>
-  //   );
-  // };
 
   return (
     <div key={id} className="post-container">
@@ -85,11 +66,23 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
             </a>
           </div>
         )}
-        <span>
-          <Comment post={post} />
-        </span>
-        {/* <button onClick={toggleComments}> Show Comments</button>
-        <div id="comments">{showComments()}</div> */}
+        <button onClick={setCommentsShowing(!commentsShowing)}>
+          Show Comments
+        </button>
+        <div id="comments">
+          {comments.error ? (
+            "There was an error loading the comments."
+          ) : comments.isLoading ? (
+            <Spinner />
+          ) : commentsShowing ? (
+            comments.currentData.map((comment) => (
+              <Comment comment={comment} key={comment.id} />
+            ))
+          ) : (
+            (document.getElementById(comments).style.display = "none")
+          )}
+          }
+        </div>
       </div>
     </div>
   );

@@ -14,6 +14,7 @@ export const Reddits = ({
 }) => {
   const { isLoading, error } = posts;
   console.log("posts", posts);
+
   return (
     <div className="title">
       <h1>
