@@ -4,7 +4,7 @@ import Logo from "../../images/logo.png";
 import bolt from "../../images/bolt.png";
 import boltRight from "../../images/bolt-right.png";
 
-export const Header = ({ setRedditPosts, setSearchTerm }) => {
+export const Header = ({ setSearchTerm }) => {
   const [searchInput, setSearchInput] = useState("");
   const onSearchChangeHandler = (e) => {
     setSearchInput(e.target.value);

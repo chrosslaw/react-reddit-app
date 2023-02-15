@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Comment from "../comment/Comment";
+import Comments from "../comment/Comments";
 import Gallery from "../gallery/Gallery";
-import { useGetCommentsQuery } from "../api/apiSlice";
+// import { useGetCommentsQuery } from "../api/apiSlice";
 import Spinner from "../../components/spinner/Spinner";
 import "./Post.css";
 
@@ -20,8 +20,8 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
     is_gallery,
     permalink,
   } = post;
-  const comments = useGetCommentsQuery(permalink);
-  console.log("post", comments);
+  // const comments = useGetCommentsQuery(permalink);
+  console.log("post", post);
   const [commentsShowing, setCommentsShowing] = useState(false);
 
   return (
@@ -66,10 +66,11 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
             </a>
           </div>
         )}
-        <button onClick={setCommentsShowing(!commentsShowing)}>
+        <Comments post={post} />
+        {/* <button onClick={setCommentsShowing(!commentsShowing)}>
           Show Comments
-        </button>
-        <div id="comments">
+        </button> */}
+        {/* <div id="comments">
           {comments.error ? (
             "There was an error loading the comments."
           ) : comments.isLoading ? (
@@ -81,8 +82,7 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
           ) : (
             (document.getElementById(comments).style.display = "none")
           )}
-          }
-        </div>
+        </div> */}
       </div>
     </div>
   );
