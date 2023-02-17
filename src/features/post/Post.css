@@ -1,6 +1,6 @@
 .post-container {
-  min-width: 40vw;
-  max-width: 40vw;
+  min-width: 60vw;
+  max-width: 60vw;
   height: auto;
   border-radius: 14px;
   padding: 20px;
@@ -26,10 +26,11 @@
   color: white;
   margin-bottom: 10px;
 }
-.media-container {
+div .media-container {
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  margin: 5px;
 }
 .video-container {
   width: 80%;
@@ -73,7 +74,7 @@ div .subreddits {
   border-radius: 14px;
 }
 div .comments {
-  display: none;
+  word-wrap: break-word;
 }
 
 @media screen and (max-width: 900px) {

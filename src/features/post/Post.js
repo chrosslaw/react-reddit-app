@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import Comments from "../comment/Comments";
 import Gallery from "../gallery/Gallery";
-// import { useGetCommentsQuery } from "../api/apiSlice";
-import Spinner from "../../components/spinner/Spinner";
+
 import "./Post.css";
 
 const Post = ({ post, setRedditPosts, setSearchTerm }) => {
@@ -18,11 +17,9 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
     subreddit,
     url,
     is_gallery,
-    permalink,
   } = post;
-  // const comments = useGetCommentsQuery(permalink);
-  console.log("post", post);
   const [commentsShowing, setCommentsShowing] = useState(false);
+  console.log("post", post);
 
   return (
     <div key={id} className="post-container">
@@ -66,24 +63,20 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
             </a>
           </div>
         )}
-        <Comments post={post} />
-        {/* <button onClick={setCommentsShowing(!commentsShowing)}>
-          Show Comments
-        </button> */}
-        {/* <div id="comments">
-          {comments.error ? (
-            "There was an error loading the comments."
-          ) : comments.isLoading ? (
-            <Spinner />
-          ) : commentsShowing ? (
-            comments.currentData.map((comment) => (
-              <Comment comment={comment} key={comment.id} />
-            ))
-          ) : (
-            (document.getElementById(comments).style.display = "none")
-          )}
-        </div> */}
       </div>
+      <button
+        type="button"
+        onClick={() => {
+          setCommentsShowing(!commentsShowing);
+        }}
+      >
+        {commentsShowing ? "Hide Comments" : "Show Comments..."}
+      </button>
+      {commentsShowing && (
+        <div className="comments ">
+          <Comments post={post} postId={id} />
+        </div>
+      )}
     </div>
   );
 };
