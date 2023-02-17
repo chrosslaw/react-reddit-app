@@ -18,16 +18,17 @@ const Comments = ({ post }) => {
         "There was an error"
       ) : (
         comments.map((comment) => (
-          <div>
-            <h5>{comment.data.author}</h5>
+          <div className="comments">
+            <h4>
+              <b>Author: {comment.data.author}</b>
+            </h4>
             <p>{comment.data.body}</p>
-            <div className="replies-container">
-              {comment.data.replies
-                ? comment.data.replies.data.children.map((reply) => (
-                    <Reply key={reply.id} reply={reply.data} />
-                  ))
-                : null}
-            </div>
+
+            {comment.data.replies
+              ? comment.data.replies.data.children.map((reply) => (
+                  <Reply key={reply.id} reply={reply.data} kind={reply.kind} />
+                ))
+              : null}
           </div>
         ))
       )}

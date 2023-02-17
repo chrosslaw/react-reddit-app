@@ -66,11 +66,14 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
       </div>
       <button
         type="button"
+        className="commentsButton"
         onClick={() => {
           setCommentsShowing(!commentsShowing);
         }}
       >
-        {commentsShowing ? "Hide Comments" : "Show Comments..."}
+        <b>
+          <p>{commentsShowing ? "Hide Comments" : "Show Comments..."}</p>
+        </b>
       </button>
       {commentsShowing && (
         <div className="comments ">

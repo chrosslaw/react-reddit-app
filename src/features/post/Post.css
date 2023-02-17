@@ -21,11 +21,16 @@
   align-items: center;
   background-color: rgb(80, 80, 80);
   border: none;
-
   text-decoration: none;
   color: white;
   margin-bottom: 10px;
 }
+button.commentsButton {
+  background-color: brown;
+  width: 100%;
+  border-radius: 14px;
+}
+
 div .media-container {
   display: flex;
   justify-content: center;
@@ -75,6 +80,41 @@ div .subreddits {
 }
 div .comments {
   word-wrap: break-word;
+  background-color: rgb(80, 80, 80);
+  border-radius: 14px;
+  margin: 0px 0px 20px 0px;
+}
+div .comments h4 {
+  background-color: rgba(142, 118, 32, 0.44);
+  padding: 10px;
+  text-align: left;
+  margin: 0px;
+  border-radius: 14px 200% 20px 30px;
+}
+.comments p {
+  background-color: burlywood;
+  color: #3a2525;
+  padding: 20px;
+  margin: 0px 10px 3px 10px;
+  border-radius: 0% 0% 14px 14px;
+  text-align: left;
+}
+div.replies h4 {
+  background-color: #3a2525;
+  padding: 10px;
+  text-align: center;
+  margin: 0px 10% 0px 10%;
+  width: 90%;
+  border-radius: 14px 14px 0px 5%;
+}
+.replies p {
+  background-color: burlywood;
+  color: #3a2525;
+  padding: 20px 30px;
+  margin: 0px 0px 0px 10%;
+  width: 90%;
+  text-align: left;
+  border-radius: 0% 0% 60% 14px;
 }
 
 @media screen and (max-width: 900px) {
