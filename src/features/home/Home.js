@@ -24,19 +24,20 @@ const Home = () => {
     //Search Query
     `search.json?q=${searchTerm}`
   );
-  //list of Reddit Posts
-  const { data: posts = [] } = useGetSubredditsQuery(`r/${redditPosts}`);
 
   return (
     <div>
-      <Header setRedditPosts={setRedditPosts} setSearchTerm={setSearchTerm} />
+      <Header
+        setRedditPosts={setRedditPosts}
+        setSearchTerm={setSearchTerm}
+        searchTerm={searchTerm}
+      />
       <Subreddits
         subs={subs}
         setRedditPosts={setRedditPosts}
         setSearchTerm={setSearchTerm}
       />
       <Reddits
-        posts={posts}
         redditPosts={redditPosts}
         setRedditPosts={setRedditPosts}
         searchTerm={searchTerm}

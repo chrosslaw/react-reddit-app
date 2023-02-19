@@ -1,17 +1,19 @@
 import React from "react";
 import Post from "../post/Post";
 import Spinner from "../../components/spinner/Spinner";
+import { useGetSubredditsQuery } from "../api/apiSlice";
 
 import "./Reddits.css";
 
 export const Reddits = ({
-  posts,
   redditPosts,
   setRedditPosts,
   searchTerm,
   setSearchTerm,
   searchList,
 }) => {
+  //list of Reddit Posts
+  const { data: posts = [] } = useGetSubredditsQuery(`r/${redditPosts}`);
   const { isLoading, error } = posts;
   console.log("posts", posts);
 

@@ -5,7 +5,7 @@ import Home from "../features/home/Home";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" id="top">
       <Home />
     </div>
   );

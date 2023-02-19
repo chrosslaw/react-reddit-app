@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Comments from "../comment/Comments";
+import ScrollToTopButton from "../buttons/ScrollToTopButton";
 
 import "./Post.css";
 
-const Post = ({ post, setRedditPosts, setSearchTerm }) => {
+const Post = ({ post, setRedditPosts, setSearchTerm, button }) => {
   const {
     id,
     is_self,
@@ -22,7 +23,7 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
   const [commentsShowing, setCommentsShowing] = useState(false);
 
   return (
-    <div key={id} className="post-container">
+    <div className="post-container">
       <h2>{title}</h2>
       <h5>Post by: {author}</h5>
       <button
@@ -80,10 +81,12 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
         </b>
       </button>
       {commentsShowing && (
-        <div className="comments ">
-          <Comments key={id} post={post} postId={id} />
+        <div className="comments">
+          <Comments key={id} post={post} />
         </div>
       )}
+
+      <ScrollToTopButton />
     </div>
   );
 };

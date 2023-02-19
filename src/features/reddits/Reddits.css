@@ -6,6 +6,7 @@
   justify-content: space-around;
   color: whitesmoke;
   margin: 0px;
+  overflow: auto;
 }
 .lightning {
   display: flex;

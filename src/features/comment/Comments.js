@@ -4,7 +4,7 @@ import Spinner from "../../components/spinner/Spinner";
 
 import Reply from "./Reply";
 
-const Comments = ({ post }) => {
+const Comments = ({ post, id }) => {
   const { permalink } = post;
 
   const { data: comments, isLoading, error } = useGetCommentsQuery(permalink);
@@ -22,6 +22,7 @@ const Comments = ({ post }) => {
             <h4>
               <b>{comment.data.author}</b>
             </h4>
+
             <p>{comment.data.body}</p>
 
             {comment.data.replies
