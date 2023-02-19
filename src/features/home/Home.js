@@ -27,7 +27,6 @@ const Home = () => {
   //list of Reddit Posts
   const { data: posts = [] } = useGetSubredditsQuery(`r/${redditPosts}`);
 
-  console.log(posts);
   return (
     <div>
       <Header setRedditPosts={setRedditPosts} setSearchTerm={setSearchTerm} />

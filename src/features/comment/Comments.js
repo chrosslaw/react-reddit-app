@@ -20,14 +20,20 @@ const Comments = ({ post }) => {
         comments.map((comment) => (
           <div className="comments">
             <h4>
-              <b>Author: {comment.data.author}</b>
+              <b>{comment.data.author}</b>
             </h4>
             <p>{comment.data.body}</p>
 
             {comment.data.replies
-              ? comment.data.replies.data.children.map((reply) => (
-                  <Reply key={reply.id} reply={reply.data} kind={reply.kind} />
-                ))
+              ? comment.data.replies.data.children.map((reply) =>
+                  reply.kind === "t1" ? (
+                    <Reply
+                      key={reply.id}
+                      reply={reply.data}
+                      kind={reply.kind}
+                    />
+                  ) : null
+                )
               : null}
           </div>
         ))

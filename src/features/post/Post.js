@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Comments from "../comment/Comments";
-import Gallery from "../gallery/Gallery";
 
 import "./Post.css";
 
@@ -17,9 +16,10 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
     subreddit,
     url,
     is_gallery,
+    num_comments,
+    thumbnail,
   } = post;
   const [commentsShowing, setCommentsShowing] = useState(false);
-  console.log("post", post);
 
   return (
     <div key={id} className="post-container">
@@ -39,7 +39,7 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
         {is_video ? (
           <div className="video-container">
             <video controls className="video">
-              <source src={media.reddit_video.scrubber_media_url} />
+              <source src={media.reddit_video.fallback_url} />
             </video>
           </div>
         ) : is_self ? (
@@ -54,7 +54,9 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
           </div>
         ) : is_gallery ? (
           <div>
-            <Gallery />
+            <a href={url} className="post-image">
+              <img src={thumbnail} alt={subreddit} />
+            </a>
           </div>
         ) : (
           <div className="post-url" href={url}>
@@ -72,12 +74,14 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
         }}
       >
         <b>
-          <p>{commentsShowing ? "Hide Comments" : "Show Comments..."}</p>
+          <p>
+            {commentsShowing ? "^ Hide Comments ^" : `${num_comments} Comments`}
+          </p>
         </b>
       </button>
       {commentsShowing && (
         <div className="comments ">
-          <Comments post={post} postId={id} />
+          <Comments key={id} post={post} postId={id} />
         </div>
       )}
     </div>
