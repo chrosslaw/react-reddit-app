@@ -1,14 +1,18 @@
-div button.scroll-to-top-button {
+.scroll-button-container .scroll-to-top-button {
   position: fixed;
   bottom: 20px;
   right: 20px;
   z-index: 999;
   background-color: #d61c1c;
   color: #fff;
-  border: none;
+  border: 3px white outset;
   border-radius: 50%;
   padding: 10px;
   cursor: pointer;
-  opacity: 1;
   transition: opacity 0.3s ease;
+}
+.scroll-button-container button:hover {
+  border: 4px inset #d61c1c;
+  background-color: white;
+  color: black;
 }

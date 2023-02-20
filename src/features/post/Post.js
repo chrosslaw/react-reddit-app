@@ -4,7 +4,7 @@ import ScrollToTopButton from "../buttons/ScrollToTopButton";
 
 import "./Post.css";
 
-const Post = ({ post, setRedditPosts, setSearchTerm, button }) => {
+const Post = ({ post, setRedditPosts, setSearchTerm }) => {
   const {
     id,
     is_self,
@@ -16,6 +16,7 @@ const Post = ({ post, setRedditPosts, setSearchTerm, button }) => {
     author,
     subreddit,
     url,
+
     is_gallery,
     num_comments,
     thumbnail,
@@ -40,12 +41,12 @@ const Post = ({ post, setRedditPosts, setSearchTerm, button }) => {
         {is_video ? (
           <div className="video-container">
             <video controls className="video">
-              <source src={media.reddit_video.fallback_url} />
+              <source type="video/mp4" src={media.reddit_video.fallback_url} />
             </video>
           </div>
         ) : is_self ? (
           <div className="selftext-container">
-            {selftext.length < 400 ? selftext : `${selftext.slice(0, 400)}`}
+            {selftext.length < 400 ? selftext : `${selftext.slice(0, 500)}`}
           </div>
         ) : is_reddit_media_domain ? (
           <div>
@@ -80,13 +81,16 @@ const Post = ({ post, setRedditPosts, setSearchTerm, button }) => {
           </p>
         </b>
       </button>
+
       {commentsShowing && (
         <div className="comments">
           <Comments key={id} post={post} />
         </div>
       )}
 
-      <ScrollToTopButton />
+      <div className="scroll-button-container">
+        <ScrollToTopButton />
+      </div>
     </div>
   );
 };

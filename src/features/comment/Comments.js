@@ -18,7 +18,7 @@ const Comments = ({ post, id }) => {
         "There was an error"
       ) : (
         comments.map((comment) => (
-          <div className="comments">
+          <div className="comments" key={id}>
             <h4>
               <b>{comment.data.author}</b>
             </h4>
@@ -28,11 +28,7 @@ const Comments = ({ post, id }) => {
             {comment.data.replies
               ? comment.data.replies.data.children.map((reply) =>
                   reply.kind === "t1" ? (
-                    <Reply
-                      key={reply.id}
-                      reply={reply.data}
-                      kind={reply.kind}
-                    />
+                    <Reply key={reply.id} reply={reply.data} />
                   ) : null
                 )
               : null}
