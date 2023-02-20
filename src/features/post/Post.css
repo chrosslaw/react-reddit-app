@@ -123,8 +123,8 @@ div.replies h4 {
 }
 @media screen and (max-width: 900px) {
   .post-container {
-    min-width: 90vw;
-    max-width: 90vw;
+    min-width: 75vw;
+    max-width: 75vw;
   }
 
   .media-container video,

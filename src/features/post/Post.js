@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Comments from "../comment/Comments";
-import ScrollToTopButton from "../buttons/ScrollToTopButton";
 
 import "./Post.css";
 
@@ -68,6 +67,7 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
           </div>
         )}
       </div>
+
       <button
         type="button"
         className="commentsButton"
@@ -77,7 +77,9 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
       >
         <b>
           <p>
-            {commentsShowing ? "^ Hide Comments ^" : `${num_comments} Comments`}
+            {commentsShowing
+              ? "^ Hide Comments ^"
+              : `${num_comments} Total Comments`}
           </p>
         </b>
       </button>
@@ -87,10 +89,6 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
           <Comments key={id} post={post} />
         </div>
       )}
-
-      <div className="scroll-button-container">
-        <ScrollToTopButton />
-      </div>
     </div>
   );
 };

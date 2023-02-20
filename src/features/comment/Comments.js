@@ -10,6 +10,22 @@ const Comments = ({ post, id }) => {
   const { data: comments, isLoading, error } = useGetCommentsQuery(permalink);
 
   console.log("Comments", comments);
+  const getReplies = (repliesArray) => {
+    let count = 0;
+    //get up to 5 replies
+    while (count < (repliesArray.length || 5)) {
+      if (repliesArray[count].kind === "t1") {
+        const reply = repliesArray[count];
+        console.log("test", reply);
+        if (reply.data.replies) {
+          getReplies(reply.data.replies.data.children);
+        }
+        return <Reply key={reply.id} reply={reply.data} />;
+      }
+
+      count++;
+    }
+  };
   return (
     <div>
       {isLoading ? (
@@ -18,7 +34,7 @@ const Comments = ({ post, id }) => {
         "There was an error"
       ) : (
         comments.map((comment) => (
-          <div className="comments" key={id}>
+          <div className="comments">
             <h4>
               <b>{comment.data.author}</b>
             </h4>
@@ -26,11 +42,7 @@ const Comments = ({ post, id }) => {
             <p>{comment.data.body}</p>
 
             {comment.data.replies
-              ? comment.data.replies.data.children.map((reply) =>
-                  reply.kind === "t1" ? (
-                    <Reply key={reply.id} reply={reply.data} />
-                  ) : null
-                )
+              ? getReplies(comment.data.replies.data.children)
               : null}
           </div>
         ))

@@ -4,6 +4,7 @@ import Header from "../header/Header";
 import Subreddits from "../subreddits/Subreddits";
 import Reddits from "../reddits/Reddits";
 import { useGetSubredditsQuery } from "../api/apiSlice";
+import ScrollToTopButton from "../../components/buttons/ScrollToTopButton";
 
 const Home = () => {
   //initially query - Popular posts
@@ -44,6 +45,8 @@ const Home = () => {
         setSearchTerm={setSearchTerm}
         searchList={searchList}
       />
+
+      <ScrollToTopButton />
     </div>
   );
 };
