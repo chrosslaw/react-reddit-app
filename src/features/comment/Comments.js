@@ -4,14 +4,22 @@ import Spinner from "../../components/spinner/Spinner";
 
 import Reply from "./Reply";
 
-const Comments = ({ post, id }) => {
+const Comments = ({ post, replies }) => {
   const { permalink } = post;
 
   const { data: comments, isLoading, error } = useGetCommentsQuery(permalink);
-  console.log("comments", comments);
+
   const getReplies = (arr) => {
     return arr.map((reply) =>
-      reply.kind === "t1" ? <Reply key={reply.id} reply={reply.data} /> : []
+      reply.kind === "t1" ? (
+        <Comments
+          key={reply.id}
+          post={reply.data}
+          replies={reply.data.children}
+        />
+      ) : (
+        []
+      )
     );
   };
   return (
@@ -23,10 +31,7 @@ const Comments = ({ post, id }) => {
       ) : (
         comments.map((comment) => (
           <div className="comments" key={comment.data.id}>
-            <h4>
-              <b>{comment.data.author}</b>
-            </h4>
-            <p>{comment.data.body}</p>
+            <Reply key={comment.data.id} reply={comment.data} />
 
             {comment.data.replies
               ? getReplies(comment.data.replies.data.children)
