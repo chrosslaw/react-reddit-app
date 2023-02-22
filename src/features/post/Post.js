@@ -14,8 +14,8 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
     title,
     author,
     subreddit,
+    subreddit_name_prefixed,
     url,
-
     is_gallery,
     num_comments,
     thumbnail,
@@ -26,6 +26,7 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
     <div className="post-container">
       <h2>{title}</h2>
       <h5>Post by: {author}</h5>
+      <span></span>
       <button
         onClick={() => {
           //if search term is currently used, clear it out. Then query the clicked post name
@@ -33,7 +34,7 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
           setRedditPosts(subreddit);
         }}
       >
-        _{subreddit}
+        Click here to see more from <b>{subreddit_name_prefixed}</b>.
       </button>
 
       <div className="media-container">
@@ -76,17 +77,28 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
         }}
       >
         <b>
-          <p>
-            {commentsShowing
-              ? "^ Hide Comments ^"
-              : `${num_comments} Total Comments`}
-          </p>
+          {commentsShowing
+            ? "^ Hide Comments ^"
+            : `${num_comments} Total Comments`}
         </b>
       </button>
 
       {commentsShowing && (
         <div className="comments">
           <Comments key={id} post={post} />
+
+          <a href={url} class="comment-link">
+            <b>Head to the source to see the full list of comments.</b>
+          </a>
+          <button
+            type="button"
+            className="commentsButton"
+            onClick={() => {
+              setCommentsShowing(!commentsShowing);
+            }}
+          >
+            <b>^ Hide Comments ^</b>
+          </button>
         </div>
       )}
     </div>

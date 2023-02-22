@@ -30,6 +30,8 @@ button.commentsButton {
   background-color: brown;
   width: 100%;
   border-radius: 14px;
+  margin-top: 20px;
+  padding: 10px;
 }
 
 div .media-container {
@@ -103,6 +105,10 @@ div .comments h4 {
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.5;
   font-size: 17px;
+}
+.comment-link {
+  text-decoration: none;
+  color: red;
 }
 div.replies h4 {
   background-color: #3a2525;
