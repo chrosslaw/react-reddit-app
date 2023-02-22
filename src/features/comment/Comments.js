@@ -8,6 +8,7 @@ const Comments = ({ post, id }) => {
   const { permalink } = post;
 
   const { data: comments, isLoading, error } = useGetCommentsQuery(permalink);
+  console.log("comments", comments);
   const getReplies = (arr) => {
     return arr.map((reply) =>
       reply.kind === "t1" ? <Reply key={reply.id} reply={reply.data} /> : []
@@ -29,7 +30,7 @@ const Comments = ({ post, id }) => {
 
             {comment.data.replies
               ? getReplies(comment.data.replies.data.children)
-              : null}
+              : []}
           </div>
         ))
       )}

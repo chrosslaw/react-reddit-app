@@ -49,8 +49,8 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
             {selftext.length < 400 ? selftext : `${selftext.slice(0, 500)}`}
           </div>
         ) : is_reddit_media_domain ? (
-          <div>
-            <a href={url} className="post-image">
+          <div className="post-image">
+            <a href={url}>
               <img src={url} alt={subreddit} />
             </a>
           </div>
@@ -87,7 +87,7 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
         <div className="comments">
           <Comments key={id} post={post} />
 
-          <a href={url} class="comment-link">
+          <a href={url} className="comment-link">
             <b>Head to the source to see the full list of comments.</b>
           </a>
           <button
