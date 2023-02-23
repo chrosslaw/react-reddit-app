@@ -26,7 +26,7 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
     <div className="post-container">
       <h2>{title}</h2>
       <h5>Post by: {author}</h5>
-      <span></span>
+
       <button
         onClick={() => {
           //if search term is currently used, clear it out. Then query the clicked post name
