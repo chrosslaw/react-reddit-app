@@ -6,7 +6,7 @@ const Reply = ({ reply }) => {
     <div>
       <div className="score">
         <h4>
-          <b className="author">Author: {author}</b>
+          <b className="author">{author}</b>
         </h4>
 
         <img src={scoreBolt} alt="bolt" height={25} width={25} />

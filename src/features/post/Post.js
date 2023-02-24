@@ -49,7 +49,19 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
           </div>
         ) : is_self ? (
           <div className="selftext-container">
-            {selftext.length < 400 ? selftext : `${selftext.slice(0, 500)}`}
+            <p>
+              {selftext.includes("http")
+                ? selftext.slice(0, 100)
+                : selftext.length < 400
+                ? selftext
+                : `${selftext.slice(0, 300)}`}
+              ......
+            </p>
+            <b>
+              <a href={url} target="_blank" rel="noreferrer">
+                <em>Read more here.</em>
+              </a>
+            </b>
           </div>
         ) : is_reddit_media_domain ? (
           <div className="post-image">
@@ -65,8 +77,8 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
           </div>
         ) : (
           <div className="post-url" href={url}>
-            <a href={url}>
-              <b>Check it out at here </b>
+            <a href={url} target="_blank" rel="noreferrer">
+              <b>Check it out here </b>
             </a>
           </div>
         )}

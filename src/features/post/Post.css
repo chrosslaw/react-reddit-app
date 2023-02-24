@@ -9,6 +9,10 @@
   background-color: rgb(80, 80, 80);
   box-shadow: -5px -5px 9px rgba(248, 39, 53, 0.7);
 }
+.post-container a {
+  text-decoration: none;
+  margin: 10px 0px;
+}
 .post-container * {
   color: white;
 }
@@ -71,13 +75,14 @@ button.commentsButton {
 .subreddits {
   margin: 10px 0px;
 }
+
 .selftext-container {
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1.5;
-  word-wrap: break-word;
+  word-wrap: inherit;
+
   padding: 10px;
   width: max-content;
-  border-radius: 14px;
 }
 
 .comments h4 {
@@ -99,7 +104,7 @@ button.commentsButton {
   line-height: 1.5;
   font-size: 17px;
 }
-div .comments {
+.comments {
   padding: 10px;
 
   word-wrap: break-word;
@@ -145,10 +150,11 @@ div .comments {
   background-color: #3a2525;
   padding: 10px;
   text-align: left;
-  margin: 5px 0px 0px 0px;
   border-radius: 14px 14px 0px 14px;
 }
-
+.author {
+  padding: 10px;
+}
 @media screen and (max-width: 900px) {
   .post-container {
     min-width: 75vw;
