@@ -19,13 +19,16 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
     is_gallery,
     num_comments,
     thumbnail,
+    replies,
   } = post;
   const [commentsShowing, setCommentsShowing] = useState(false);
 
   return (
     <div className="post-container">
       <h2>{title}</h2>
-      <h5>Post by: {author}</h5>
+      <p>
+        <b>Post by: {author}</b>
+      </p>
 
       <button
         onClick={() => {
@@ -34,7 +37,7 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
           setRedditPosts(subreddit);
         }}
       >
-        Click here to see more from <b>{subreddit_name_prefixed}</b>.
+        <b>{subreddit_name_prefixed}</b>.
       </button>
 
       <div className="media-container">
@@ -85,7 +88,7 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
 
       {commentsShowing && (
         <div className="comments">
-          <Comments key={id} post={post} />
+          <Comments key={id} post={post} replies={replies} depth={0} />
 
           <a href={url} className="comment-link">
             <b>Head to the source to see the full list of comments.</b>

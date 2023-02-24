@@ -4,18 +4,19 @@ import Spinner from "../../components/spinner/Spinner";
 
 import Reply from "./Reply";
 
-const Comments = ({ post, replies, depth = 0 }) => {
+const Comments = ({ post, replies, depth }) => {
   const { permalink } = post;
 
   const { data: comments, isLoading, error } = useGetCommentsQuery(permalink);
-  // console.log(comments);
+  console.log(comments);
+  //get Replies recursively gets comments
+
   const getReplies = (arr) => {
     return arr.map((reply) =>
       reply.kind === "t1" ? (
-        <div className={`reply-depth-${depth + 1}`}>
-          /recursively get comments
+        <div className={`replies reply-depth-${depth + 1}`}>
           <Comments
-            key={reply.id}
+            key={reply.data.id}
             post={reply.data}
             replies={reply.data.children}
             depth={depth + 1}
@@ -34,13 +35,14 @@ const Comments = ({ post, replies, depth = 0 }) => {
         "There was an error"
       ) : (
         comments.map((comment) => (
-          <div className="comments" key={comment.data.id}>
+          <div>
             <Reply key={comment.data.id} reply={comment.data} />
             <div className={`replies reply-depth-${depth}`}>
               {/*only get the list of two child elements*/}
-              {comment.data.replies
-                ? getReplies(comment.data.replies.data.children).slice(0, 2)
-                : []}
+              {(comment.data.replies
+                ? getReplies(comment.data.replies.data.children)
+                : []
+              ).slice(0, 2)}
             </div>
           </div>
         ))

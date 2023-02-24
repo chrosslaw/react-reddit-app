@@ -4,14 +4,14 @@ const Reply = ({ reply }) => {
   const { author, body, score } = reply;
   return (
     <div>
-      <div class="score">
+      <div className="score">
         <h4>
           <b className="author">Author: {author}</b>
         </h4>
+
         <img src={scoreBolt} alt="bolt" height={25} width={25} />
         {score}
       </div>
-
       <p>{body}</p>
     </div>
   );

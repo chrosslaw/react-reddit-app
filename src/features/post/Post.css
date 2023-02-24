@@ -7,13 +7,9 @@
   padding: 20px;
   margin-top: 25px;
   background-color: rgb(80, 80, 80);
-  box-shadow: -5px -5px 9px rgba(248, 39, 53, 0.7),
-    -5px -5px 9px rgba(248, 39, 53, 0.7), -5px -5px 9px rgba(248, 39, 53, 0.7),
-    -5px -5px 9px rgba(248, 39, 53, 0.7);
+  box-shadow: -5px -5px 9px rgba(248, 39, 53, 0.7);
 }
-.post-container h2,
-.post-container p {
-  padding: 0px 10px;
+.post-container * {
   color: white;
 }
 .post-container button {
@@ -24,9 +20,10 @@
   background-color: rgb(80, 80, 80);
   border: none;
   text-decoration: none;
-  color: white;
+  color: inherit;
   margin-bottom: 10px;
 }
+
 button.commentsButton {
   background-color: brown;
   width: 100%;
@@ -35,7 +32,7 @@ button.commentsButton {
   padding: 10px;
 }
 
-div .media-container {
+.media-container {
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -47,102 +44,109 @@ div .media-container {
   height: 0px;
   position: relative;
 }
-
 .video {
-  width: 70%;
-  height: 70%;
   position: absolute;
   top: 15%;
   left: 15%;
+  width: 70%;
+  height: 70%;
 }
 .post-url a {
   margin: 10px;
-
   color: black;
 }
-div .post-image a img {
-  height: 400px;
-  width: auto;
+.post-image {
+  position: relative;
+}
+.post-image a img {
+  width: 70%;
   border-radius: 14px;
   border: solid black 1px;
   margin-bottom: 10px;
 }
-a .subreddit-redirect {
+.subreddit-redirect {
   text-decoration: none;
 }
-div .subreddits {
+
+.subreddits {
   margin: 10px 0px;
 }
 .selftext-container {
   font-size: 20px;
   line-height: 1.5;
-
   word-wrap: break-word;
   padding: 10px;
   width: max-content;
   border-radius: 14px;
 }
-div .comments {
-  word-wrap: break-word;
-  background-color: rgb(80, 80, 80);
-  border-radius: 14px;
-  margin: 0px 0px 20px 0px;
-}
-div .comments h4 {
+
+.comments h4 {
   background-color: rgba(142, 118, 32, 0.44);
   width: 100%;
-  padding: 10px;
-  text-align: left;
-  padding-left: 30px;
-  margin: 0px;
+  padding: 10px 30px 10px 0;
+  margin: 0;
   border-radius: 14px 200% 14px 30px;
+  text-align: left;
 }
 .comments p {
   background-color: burlywood;
   color: #3a2525;
   padding: 20px;
-  margin: 0px 10px 3px 10px;
-  border-radius: 0% 14px 14px 14px;
+  margin: 0px 10px 3px;
+  border-radius: 0% 14px 14px;
   text-align: left;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.5;
   font-size: 17px;
 }
-.score img {
-  margin-left: 30px;
+div .comments {
+  padding: 10px;
+
+  word-wrap: break-word;
 }
+
 .comment-link {
   text-decoration: none;
   color: red;
 }
-div.replies h4 {
-  background-color: #3a2525;
-  padding: 10px;
-  text-align: left;
-  margin: 20px 10% 0px 0px;
-  width: 90%;
-  border-radius: 14px 14px 0px 14px;
-}
+
 .replies p {
   background-color: burlywood;
   color: #3a2525;
-  /* padding: 20px 30px; */
-  margin: 0px 0px 0px 10%;
-  width: 90%;
+  margin: 0px 0px 0px 20px;
+
   text-align: left;
   border-radius: 0% 14px 14px 14px;
 }
-.reply-depth-1 {
-  margin-left: 20px;
-  border-left: 1px solid #ccc;
-  padding-left: 10px;
+
+.replies {
+  margin-top: 10px;
 }
 
-div .score {
+.reply-depth-1,
+.reply-depth-2,
+.reply-depth-3,
+.reply-depth-4,
+.reply-depth-5 {
+  margin-left: 20px;
+}
+.reply-depth-1,
+.reply-depth-3,
+.reply-depth-5 {
+  border-left: 1px solid #ccc;
+}
+.score {
   display: flex;
+  background-color: white;
   align-items: center;
   justify-content: flex-end;
   padding-right: 20px;
+  width: 90%;
+  background-color: #3a2525;
+  padding: 10px;
+  text-align: left;
+  margin: 5px 0px 0px 0px;
+  border-radius: 14px 14px 0px 14px;
 }
 
 @media screen and (max-width: 900px) {
