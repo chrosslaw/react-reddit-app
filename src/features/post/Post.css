@@ -118,20 +118,26 @@ div .comments h4 {
 div.replies h4 {
   background-color: #3a2525;
   padding: 10px;
-  text-align: center;
-  margin: 0px 10% 0px 10%;
+  text-align: left;
+  margin: 20px 10% 0px 0px;
   width: 90%;
-  border-radius: 14px 14px 0px 5%;
+  border-radius: 14px 14px 0px 14px;
 }
 .replies p {
   background-color: burlywood;
   color: #3a2525;
-  padding: 20px 30px;
+  /* padding: 20px 30px; */
   margin: 0px 0px 0px 10%;
   width: 90%;
   text-align: left;
   border-radius: 0% 14px 14px 14px;
 }
+.reply-depth-1 {
+  margin-left: 20px;
+  border-left: 1px solid #ccc;
+  padding-left: 10px;
+}
+
 div .score {
   display: flex;
   align-items: center;
