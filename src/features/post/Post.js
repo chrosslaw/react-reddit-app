@@ -20,9 +20,12 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
     num_comments,
     thumbnail,
     replies,
+    permalink,
   } = post;
-  const [commentsShowing, setCommentsShowing] = useState(false);
 
+  //show/hide comments bool variable
+  const [commentsShowing, setCommentsShowing] = useState(false);
+  //returns a single post container with the author, title, media type and comments button
   return (
     <div className="post-container">
       <h2>{title}</h2>
@@ -98,24 +101,26 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
         </b>
       </button>
 
-      {commentsShowing && (
-        <div className="comments">
-          <Comments key={id} post={post} replies={replies} depth={0} />
-
-          <a href={url} className="comment-link">
-            <b>Head to the source to see the full list of comments.</b>
-          </a>
-          <button
-            type="button"
-            className="commentsButton"
-            onClick={() => {
-              setCommentsShowing(!commentsShowing);
-            }}
-          >
-            <b>^ Hide Comments ^</b>
-          </button>
-        </div>
-      )}
+      {
+        //if commmentsShowing is false, this section below is not visible
+        commentsShowing && (
+          <div className="comments">
+            <Comments key={id} post={post} replies={replies} depth={0} />
+            <div className="comment-link">
+              <b>
+                <a
+                  href={`https://reddit.com${permalink}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Click here to comment or see the full list of comments at the
+                  source.
+                </a>
+              </b>
+            </div>
+          </div>
+        )
+      }
     </div>
   );
 };

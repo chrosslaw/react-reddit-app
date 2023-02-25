@@ -12,11 +12,7 @@ export const apiSlice = createApi({
     }),
     getComments: builder.query({
       query: (permalink) => `${permalink}.json`,
-      transformResponse: (response) =>
-        response[1].data.children.slice(
-          0,
-          response[1].data.children > 6 ? 6 : response[1].data.children.length
-        ),
+      transformResponse: (response) => response[1].data.children.slice(0, 6),
     }),
   }),
 });

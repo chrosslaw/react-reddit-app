@@ -9,14 +9,13 @@ const Comments = ({ post, replies, depth }) => {
 
   const { data: comments, isLoading, error } = useGetCommentsQuery(permalink);
   console.log(comments);
-  //get Replies recursively gets comments
 
+  //getReplies function recursively fetches comments and adds depth for styling
   const getReplies = (arr) => {
     return arr.map((reply) =>
       reply.kind === "t1" ? (
-        <div className={`replies reply-depth-${depth + 1}`}>
+        <div key={reply.data.id} className={`replies reply-depth-${depth + 1}`}>
           <Comments
-            key={reply.data.id}
             post={reply.data}
             replies={reply.data.children}
             depth={depth + 1}
@@ -27,6 +26,8 @@ const Comments = ({ post, replies, depth }) => {
       )
     );
   };
+  //End getReplies Function
+  //return 6 comments(See apiSlice), along with two replies, and those replies as well.
   return (
     <div>
       {isLoading ? (
@@ -35,8 +36,8 @@ const Comments = ({ post, replies, depth }) => {
         "There was an error"
       ) : (
         comments.map((comment) => (
-          <div>
-            <Reply key={comment.data.id} reply={comment.data} />
+          <div key={comment.data.id}>
+            <Reply reply={comment.data} />
             <div className={`replies reply-depth-${depth}`}>
               {/*only get the list of two child elements*/}
               {(comment.data.replies

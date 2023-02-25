@@ -1,28 +1,19 @@
 .sub-button {
-  height: auto;
   display: flex;
   text-align: center;
-  align-items: center;
-  background-color: white;
   width: 100%;
+  align-items: center;
   text-decoration: none;
   border: outset;
   background-color: rgb(75, 75, 75);
-  color: whitesmoke;
+  color: white;
   cursor: pointer;
 }
 .subreddits-container {
   background-color: rgb(30, 30, 30);
   overflow: hidden;
 }
-.sticky {
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
-.list-item {
-  flex-shrink: -1;
-}
+
 .list-item img {
   width: 30px;
   padding-right: 5px;
@@ -31,17 +22,31 @@ ul.subreddits {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: stretch;
   list-style: none;
   column-gap: 10px;
   row-gap: 10px;
-
   margin: 0px;
   padding: 10px 0px;
 }
 div.subreddits-container h1 {
-  color: whitesmoke;
+  color: white;
   border: outset;
   background-color: black;
   margin: 0px;
   padding: 5px;
+}
+@media screen and (max-width: 400px) {
+  .sub-button {
+    border: none;
+  }
+  ul.subreddits {
+    list-style: none;
+    column-gap: 0px;
+    row-gap: 2px;
+    flex-direction: column;
+
+    padding: 0px;
+    text-align: center;
+  }
 }
