@@ -22,7 +22,7 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
     replies,
     permalink,
   } = post;
-
+  console.log(post);
   //show/hide comments bool variable
   const [commentsShowing, setCommentsShowing] = useState(false);
   //returns a single post container with the author, title, media type and comments button
@@ -47,7 +47,10 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
         {is_video ? (
           <div className="video-container">
             <video controls className="video">
-              <source type="video/mp4" src={media.reddit_video.fallback_url} />
+              <source
+                type="video/mp4"
+                src={media.reddit_video.scrubber_media_url}
+              />
             </video>
           </div>
         ) : is_self ? (
