@@ -47,10 +47,7 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
         {is_video ? (
           <div className="video-container">
             <video controls className="video">
-              <source
-                type="video/mp4"
-                src={media.reddit_video.scrubber_media_url}
-              />
+              <source type="video/mp4" src={media.reddit_video.dash_url} />
             </video>
           </div>
         ) : is_self ? (
