@@ -11,15 +11,6 @@ const Home = () => {
   const [redditPosts, setRedditPosts] = useState("Popular");
   const [searchTerm, setSearchTerm] = useState("");
 
-  //List of Subreddits
-  // const popList = [
-  //   "Popular",
-  //   "pics",
-  //   "all/hot",
-  //   "all/new",
-  //   "all/top",
-  //   "all/rising",
-  // ];
   const { data: subs = [] } = useGetSubredditsQuery("subreddits");
   const { data: searchList = [] } = useGetSubredditsQuery(
     //Search Query

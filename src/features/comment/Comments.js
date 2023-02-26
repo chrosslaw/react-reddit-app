@@ -5,10 +5,10 @@ import Spinner from "../../components/spinner/Spinner";
 import Reply from "./Reply";
 
 const Comments = ({ post, replies, depth }) => {
+  //replies is passed as a prop in the getReplies function.
   const { permalink } = post;
 
   const { data: comments, isLoading, error } = useGetCommentsQuery(permalink);
-  console.log(comments);
 
   //getReplies function recursively fetches comments and adds depth for styling
   const getReplies = (arr) => {

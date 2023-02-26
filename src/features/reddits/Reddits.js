@@ -15,7 +15,6 @@ export const Reddits = ({
   //list of Reddit Posts
   const { data: posts = [] } = useGetSubredditsQuery(`r/${redditPosts}`);
   const { isLoading, error } = posts;
-  // console.log("posts", posts);
 
   return (
     <div className="title">
