@@ -22,7 +22,7 @@ const Post = ({ post, setRedditPosts, setSearchTerm }) => {
     replies,
     permalink,
   } = post;
-  console.log(post);
+
   //show/hide comments bool variable
   const [commentsShowing, setCommentsShowing] = useState(false);
   //returns a single post container with the author, title, media type and comments button
