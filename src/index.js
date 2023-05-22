@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import App from "./app/App";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "./app/store";
+import { Analytics } from "@vercel/analytics/react";
 import "./index.css";
 
 const container = document.getElementById("root");
@@ -13,6 +14,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <App />
+      <Analytics />
     </Provider>
   </React.StrictMode>
 );
